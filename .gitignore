@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+*.properties
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -38,4 +39,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.propeties
+src/main/resources/com/starsolutions/starsolutionscrm/database.properties
