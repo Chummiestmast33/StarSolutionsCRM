@@ -6,7 +6,6 @@ module com.starsolutions.starsolutionscrm {
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
     requires java.sql;
-    requires org.junit.jupiter.api;
 
     opens com.starsolutions.starsolutionscrm to javafx.fxml;
     opens com.starsolutions.starsolutionscrm.controller.base to javafx.fxml;
