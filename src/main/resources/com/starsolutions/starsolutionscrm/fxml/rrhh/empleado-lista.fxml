@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.rrhh.EmpleadoListaController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="500.0" prefWidth="750.0">
 
-</AnchorPane>
+    <!-- ===== BARRA SUPERIOR ===== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-padding: 12 16 12 16; -fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
+
+            <Label text="Empleados"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Nuevo"       onAction="#onNuevo"/>
+            <Button text="Editar"      onAction="#onEditar"/>
+            <Button text="Desactivar"  onAction="#onDesactivar"/>
+            <Button text="Refrescar"   onAction="#onRefrescar"/>
+
+        </HBox>
+    </top>
+
+    <!-- ===== TABLA ===== -->
+    <center>
+        <TableView fx:id="tablaEmpleados"
+                   style="-fx-padding: 12;">
+            <columns>
+                <TableColumn fx:id="colNum"    text="Núm. Empleado" prefWidth="120"/>
+                <TableColumn fx:id="colNombre" text="Nombre"        prefWidth="250"/>
+                <TableColumn fx:id="colTipo"   text="Tipo / Rol"    prefWidth="160"/>
+                <TableColumn fx:id="colActivo" text="Activo"        prefWidth="80"/>
+            </columns>
+            <placeholder>
+                <Label text="No hay empleados registrados."/>
+            </placeholder>
+        </TableView>
+    </center>
+
+</BorderPane>

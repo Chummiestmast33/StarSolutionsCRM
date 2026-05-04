@@ -8,11 +8,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CRMApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CRMApplication.class.getResource("fxml/base/main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        stage.setTitle("Star Solutions CRM");
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                CRMApplication.class.getResource(
+                        "fxml/base/login.fxml"   // <-- abre login, no main
+                )
+        );
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setTitle("Star Solutions CRM — Login");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

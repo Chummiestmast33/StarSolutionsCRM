@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.base.MainController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="720.0" prefWidth="1280.0">
 
-</AnchorPane>
+    <!-- ===== BARRA SUPERIOR ===== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              style="-fx-background-color: #2c3e50; -fx-padding: 12 20 12 20;">
+
+            <Label text="Star Solutions CRM"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+            <!-- Espacio flexible -->
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <VBox alignment="CENTER_RIGHT" spacing="2">
+                <Label fx:id="lblBienvenida"
+                       text="Bienvenido"
+                       style="-fx-font-size: 13px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Label fx:id="lblRol"
+                       text="Rol: —"
+                       style="-fx-font-size: 11px; -fx-text-fill: #aaaaaa;"/>
+            </VBox>
+
+            <Button text="Cerrar Sesión"
+                    onAction="#onCerrarSesion"
+                    style="-fx-font-size: 12px;"/>
+        </HBox>
+    </top>
+
+    <!-- ===== MENÚ LATERAL IZQUIERDO ===== -->
+    <left>
+        <VBox spacing="8"
+              style="-fx-background-color: #ecf0f1; -fx-padding: 20 12 20 12; -fx-min-width: 200;">
+
+            <Label text="Módulos"
+                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #888888;"/>
+
+            <Button fx:id="btnEmpleados"
+                    text="👤  Empleados"
+                    onAction="#onEmpleados"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+            <Button fx:id="btnNomina"
+                    text="💰  Nómina"
+                    onAction="#onNomina"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+            <Button fx:id="btnAsistencia"
+                    text="📋  Asistencia"
+                    onAction="#onAsistencia"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+            <Button fx:id="btnProduccion"
+                    text="🏭  Producción"
+                    onAction="#onProduccion"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+        </VBox>
+    </left>
+
+    <!-- ===== ÁREA CENTRAL ===== -->
+    <center>
+        <VBox alignment="CENTER" spacing="12"
+              style="-fx-background-color: #ffffff; -fx-padding: 40;">
+
+            <Label text="Selecciona un módulo del menú lateral"
+                   style="-fx-font-size: 15px; -fx-text-fill: #aaaaaa;"/>
+
+        </VBox>
+    </center>
+
+</BorderPane>

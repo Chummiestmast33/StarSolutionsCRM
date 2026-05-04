@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.produccion.OrdenProduccionListaController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="540.0" prefWidth="980.0">
 
-</AnchorPane>
+    <!-- ===== BARRA SUPERIOR ===== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-padding: 12 16 12 16; -fx-background-color: #f4f4f4;
+                     -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
+
+            <Label text="Órdenes de Producción"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <Separator orientation="VERTICAL"/>
+
+            <Label text="Filtrar por estado:"/>
+            <ComboBox fx:id="cmbFiltroEstado"
+                      onAction="#onFiltrar"
+                      prefWidth="150"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Nueva orden"  onAction="#onNueva"/>
+            <Button text="Completar"    onAction="#onCompletar"/>
+            <Button text="Cancelar"     onAction="#onCancelar"/>
+            <Button text="Refrescar"    onAction="#onRefrescar"/>
+
+        </HBox>
+    </top>
+
+    <!-- ===== TABLA ===== -->
+    <center>
+        <TableView fx:id="tablaOrdenes" style="-fx-padding: 12;">
+            <columns>
+                <TableColumn fx:id="colId"            text="ID Orden"      prefWidth="80"/>
+                <TableColumn fx:id="colEmpleado"      text="ID Empleado"   prefWidth="100"/>
+                <TableColumn fx:id="colProducto"      text="ID Producto"   prefWidth="100"/>
+                <TableColumn fx:id="colPlanificado"   text="Planificado"   prefWidth="100"/>
+                <TableColumn fx:id="colProducido"     text="Producido"     prefWidth="100"/>
+                <TableColumn fx:id="colFechaInicio"   text="Fecha Inicio"  prefWidth="150"/>
+                <TableColumn fx:id="colFechaEstimada" text="Fecha Est. Fin" prefWidth="130"/>
+                <TableColumn fx:id="colEstado"        text="Estado"        prefWidth="110"/>
+            </columns>
+            <placeholder>
+                <Label text="No hay órdenes de producción para mostrar."/>
+            </placeholder>
+        </TableView>
+    </center>
+
+</BorderPane>
