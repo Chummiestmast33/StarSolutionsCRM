@@ -1,4 +1,4 @@
-package com.starsolutions.starsolutionscrm.model.invetario;
+package com.starsolutions.starsolutionscrm.model.inventario;
 
 import java.util.Objects;
 

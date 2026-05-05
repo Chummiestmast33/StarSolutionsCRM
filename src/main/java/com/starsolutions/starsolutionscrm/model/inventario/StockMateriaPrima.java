@@ -1,41 +1,39 @@
-package com.starsolutions.starsolutionscrm.model.invetario;
+package com.starsolutions.starsolutionscrm.model.inventario;
 
 import java.util.Objects;
 
-public class Stock {
-	private Integer idStock;
-	private Integer idProducto;
+public class StockMateriaPrima {
+	private Integer idStockMateriaPrima;
+	private Integer idMateria;
 	private int cantidadActual;
 	private int stockMinimo;
-	private Integer stockMaximo;
 	private String ubicacion;
 
-	public Stock() {
+	public StockMateriaPrima() {
 	}
 
-	public Stock(Integer idStock, Integer idProducto, int cantidadActual, int stockMinimo, Integer stockMaximo, String ubicacion) {
-		this.idStock = idStock;
-		this.idProducto = idProducto;
+	public StockMateriaPrima(Integer idStockMateriaPrima, Integer idMateria, int cantidadActual, int stockMinimo, String ubicacion) {
+		this.idStockMateriaPrima = idStockMateriaPrima;
+		this.idMateria = idMateria;
 		this.cantidadActual = cantidadActual;
 		this.stockMinimo = stockMinimo;
-		this.stockMaximo = stockMaximo;
 		this.ubicacion = ubicacion;
 	}
 
-	public Integer getIdStock() {
-		return idStock;
+	public Integer getIdStockMateriaPrima() {
+		return idStockMateriaPrima;
 	}
 
-	public void setIdStock(Integer idStock) {
-		this.idStock = idStock;
+	public void setIdStockMateriaPrima(Integer idStockMateriaPrima) {
+		this.idStockMateriaPrima = idStockMateriaPrima;
 	}
 
-	public Integer getIdProducto() {
-		return idProducto;
+	public Integer getIdMateria() {
+		return idMateria;
 	}
 
-	public void setIdProducto(Integer idProducto) {
-		this.idProducto = idProducto;
+	public void setIdMateria(Integer idMateria) {
+		this.idMateria = idMateria;
 	}
 
 	public int getCantidadActual() {
@@ -54,14 +52,6 @@ public class Stock {
 		this.stockMinimo = stockMinimo;
 	}
 
-	public Integer getStockMaximo() {
-		return stockMaximo;
-	}
-
-	public void setStockMaximo(Integer stockMaximo) {
-		this.stockMaximo = stockMaximo;
-	}
-
 	public String getUbicacion() {
 		return ubicacion;
 	}
@@ -72,12 +62,11 @@ public class Stock {
 
 	@Override
 	public String toString() {
-		return "Stock{" +
-				"idStock=" + idStock +
-				", idProducto=" + idProducto +
+		return "StockMateriaPrima{" +
+				"idStockMateriaPrima=" + idStockMateriaPrima +
+				", idMateria=" + idMateria +
 				", cantidadActual=" + cantidadActual +
 				", stockMinimo=" + stockMinimo +
-				", stockMaximo=" + stockMaximo +
 				", ubicacion='" + ubicacion + '\'' +
 				'}';
 	}
@@ -90,12 +79,12 @@ public class Stock {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Stock stock = (Stock) o;
-		return Objects.equals(idStock, stock.idStock);
+		StockMateriaPrima that = (StockMateriaPrima) o;
+		return Objects.equals(idStockMateriaPrima, that.idStockMateriaPrima);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idStock);
+		return Objects.hash(idStockMateriaPrima);
 	}
 }

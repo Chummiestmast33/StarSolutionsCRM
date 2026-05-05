@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.compras.ClienteFormController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.starsolutions.starsolutionscrm.controller.compras.ClienteFormController"
+      prefWidth="380.0" spacing="14"
+      style="-fx-padding: 24;">
 
-</AnchorPane>
+    <!-- Titulo -->
+    <Label text="Datos del Cliente"
+           style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+    <!-- Campos de texto -->
+    <Label text="Nombre o Razon Social"/>
+    <TextField fx:id="txtNombre" promptText="Ej. Tienda Norte SA"/>
+
+    <Label text="RFC (Opcional)"/>
+    <TextField fx:id="txtRfc" promptText="13 caracteres maximo"/>
+
+    <Label text="Direccion"/>
+    <TextField fx:id="txtDireccion" promptText="Calle, numero, colonia"/>
+
+    <!-- Contenedor de botones -->
+    <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+        <Button text="Cancelar" onAction="#onCancelar"/>
+        <Button text="Guardar"  onAction="#onGuardar" defaultButton="true"
+                style="-fx-font-weight: bold; -fx-background-color: #2196F3; -fx-text-fill: white;"/>
+    </HBox>
+
+</VBox>

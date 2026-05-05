@@ -7,6 +7,7 @@ module com.starsolutions.starsolutionscrm {
     requires net.synedra.validatorfx;
     requires java.sql;
 
+    // Permisos para los Controladores (Para que JavaFX inyecte los @FXML y eventos)
     opens com.starsolutions.starsolutionscrm to javafx.fxml;
     opens com.starsolutions.starsolutionscrm.controller.base to javafx.fxml;
     opens com.starsolutions.starsolutionscrm.controller.compras to javafx.fxml;
@@ -14,6 +15,14 @@ module com.starsolutions.starsolutionscrm {
     opens com.starsolutions.starsolutionscrm.controller.produccion to javafx.fxml;
     opens com.starsolutions.starsolutionscrm.controller.rrhh to javafx.fxml;
     opens com.starsolutions.starsolutionscrm.controller.ventas to javafx.fxml;
+
+    opens com.starsolutions.starsolutionscrm.model.crm to javafx.base;
+    opens com.starsolutions.starsolutionscrm.model.ventas to javafx.base;
+    opens com.starsolutions.starsolutionscrm.model.rrhh to javafx.base;
+    opens com.starsolutions.starsolutionscrm.model.produccion to javafx.base;
+    opens com.starsolutions.starsolutionscrm.model.compras to javafx.base;
+    opens com.starsolutions.starsolutionscrm.model.inventario to javafx.base;
+
     exports com.starsolutions.starsolutionscrm;
     exports com.starsolutions.starsolutionscrm.database;
 }

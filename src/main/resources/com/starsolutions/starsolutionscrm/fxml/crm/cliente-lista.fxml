@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.compras.ClienteListaController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="500.0" prefWidth="800.0"
+            stylesheets="@../../css/styles.css">
 
-</AnchorPane>
+    <!-- Barra superior -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-padding: 12 16 12 16; -fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
+
+            <Label text="Directorio de Clientes"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Nuevo Cliente" onAction="#onNuevo"/>
+            <Button text="Editar"        onAction="#onEditar"/>
+            <Button text="Desactivar"    onAction="#onDesactivar"/>
+            <Button text="Refrescar"     onAction="#onRefrescar"/>
+
+        </HBox>
+    </top>
+
+    <!-- Tabla central -->
+    <center>
+        <TableView fx:id="tablaClientes" style="-fx-padding: 12;">
+            <columns>
+                <TableColumn fx:id="colId"        text="ID"        prefWidth="60"/>
+                <TableColumn fx:id="colNombre"    text="Nombre"    prefWidth="250"/>
+                <TableColumn fx:id="colRfc"       text="RFC"       prefWidth="130"/>
+                <TableColumn fx:id="colDireccion" text="Direccion" prefWidth="250"/>
+                <TableColumn fx:id="colActivo"    text="Activo"    prefWidth="80"/>
+            </columns>
+            <placeholder>
+                <Label text="No hay clientes registrados"/>
+            </placeholder>
+        </TableView>
+    </center>
+
+</BorderPane>

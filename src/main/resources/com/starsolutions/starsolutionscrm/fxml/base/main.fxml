@@ -9,7 +9,7 @@
             fx:controller="com.starsolutions.starsolutionscrm.controller.base.MainController"
             prefHeight="720.0" prefWidth="1280.0">
 
-    <!-- ===== BARRA SUPERIOR ===== -->
+    <!-- Barra superior -->
     <top>
         <HBox alignment="CENTER_LEFT" spacing="16"
               style="-fx-background-color: #2c3e50; -fx-padding: 12 20 12 20;">
@@ -25,24 +25,25 @@
                        text="Bienvenido"
                        style="-fx-font-size: 13px; -fx-text-fill: white; -fx-font-weight: bold;"/>
                 <Label fx:id="lblRol"
-                       text="Rol: —"
+                       text="Rol: --"
                        style="-fx-font-size: 11px; -fx-text-fill: #aaaaaa;"/>
             </VBox>
 
-            <Button text="Cerrar Sesión"
+            <Button text="Cerrar Sesion"
                     onAction="#onCerrarSesion"
                     style="-fx-font-size: 12px;"/>
         </HBox>
     </top>
 
-    <!-- ===== MENÚ LATERAL IZQUIERDO ===== -->
+    <!-- Menu lateral izquierdo -->
     <left>
         <VBox spacing="8"
               style="-fx-background-color: #ecf0f1; -fx-padding: 20 12 20 12; -fx-min-width: 200;">
 
-            <Label text="Módulos"
+            <Label text="Modulos"
                    style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #888888;"/>
 
+            <!-- Botones originales de tus companeros -->
             <Button fx:id="btnEmpleados"
                     text="👤  Empleados"
                     onAction="#onEmpleados"
@@ -50,7 +51,7 @@
                     style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
 
             <Button fx:id="btnNomina"
-                    text="💰  Nómina"
+                    text="💰  Nomina"
                     onAction="#onNomina"
                     maxWidth="Infinity"
                     style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
@@ -62,20 +63,42 @@
                     style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
 
             <Button fx:id="btnProduccion"
-                    text="🏭  Producción"
+                    text="🏭  Produccion"
                     onAction="#onProduccion"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+            <!-- Separador visual -->
+            <Separator style="-fx-padding: 5 0 5 0;"/>
+
+            <!-- Tus botones nuevos -->
+            <Button fx:id="btnClientes"
+                    text="🤝  Clientes"
+                    onAction="#onClientes"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+            <Button fx:id="btnProveedores"
+                    text="📦  Proveedores"
+                    onAction="#onProveedores"
+                    maxWidth="Infinity"
+                    style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
+            <Button fx:id="btnVentas"
+                    text="🛒  Punto de Venta"
+                    onAction="#onVentas"
                     maxWidth="Infinity"
                     style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
 
         </VBox>
     </left>
 
-    <!-- ===== ÁREA CENTRAL ===== -->
+    <!-- Area central -->
     <center>
         <VBox alignment="CENTER" spacing="12"
               style="-fx-background-color: #ffffff; -fx-padding: 40;">
 
-            <Label text="Selecciona un módulo del menú lateral"
+            <Label text="Selecciona un modulo del menu lateral"
                    style="-fx-font-size: 15px; -fx-text-fill: #aaaaaa;"/>
 
         </VBox>

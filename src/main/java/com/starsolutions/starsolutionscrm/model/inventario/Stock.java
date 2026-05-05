@@ -1,39 +1,41 @@
-package com.starsolutions.starsolutionscrm.model.invetario;
+package com.starsolutions.starsolutionscrm.model.inventario;
 
 import java.util.Objects;
 
-public class StockMateriaPrima {
-	private Integer idStockMateriaPrima;
-	private Integer idMateria;
+public class Stock {
+	private Integer idStock;
+	private Integer idProducto;
 	private int cantidadActual;
 	private int stockMinimo;
+	private Integer stockMaximo;
 	private String ubicacion;
 
-	public StockMateriaPrima() {
+	public Stock() {
 	}
 
-	public StockMateriaPrima(Integer idStockMateriaPrima, Integer idMateria, int cantidadActual, int stockMinimo, String ubicacion) {
-		this.idStockMateriaPrima = idStockMateriaPrima;
-		this.idMateria = idMateria;
+	public Stock(Integer idStock, Integer idProducto, int cantidadActual, int stockMinimo, Integer stockMaximo, String ubicacion) {
+		this.idStock = idStock;
+		this.idProducto = idProducto;
 		this.cantidadActual = cantidadActual;
 		this.stockMinimo = stockMinimo;
+		this.stockMaximo = stockMaximo;
 		this.ubicacion = ubicacion;
 	}
 
-	public Integer getIdStockMateriaPrima() {
-		return idStockMateriaPrima;
+	public Integer getIdStock() {
+		return idStock;
 	}
 
-	public void setIdStockMateriaPrima(Integer idStockMateriaPrima) {
-		this.idStockMateriaPrima = idStockMateriaPrima;
+	public void setIdStock(Integer idStock) {
+		this.idStock = idStock;
 	}
 
-	public Integer getIdMateria() {
-		return idMateria;
+	public Integer getIdProducto() {
+		return idProducto;
 	}
 
-	public void setIdMateria(Integer idMateria) {
-		this.idMateria = idMateria;
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
 	}
 
 	public int getCantidadActual() {
@@ -52,6 +54,14 @@ public class StockMateriaPrima {
 		this.stockMinimo = stockMinimo;
 	}
 
+	public Integer getStockMaximo() {
+		return stockMaximo;
+	}
+
+	public void setStockMaximo(Integer stockMaximo) {
+		this.stockMaximo = stockMaximo;
+	}
+
 	public String getUbicacion() {
 		return ubicacion;
 	}
@@ -62,11 +72,12 @@ public class StockMateriaPrima {
 
 	@Override
 	public String toString() {
-		return "StockMateriaPrima{" +
-				"idStockMateriaPrima=" + idStockMateriaPrima +
-				", idMateria=" + idMateria +
+		return "Stock{" +
+				"idStock=" + idStock +
+				", idProducto=" + idProducto +
 				", cantidadActual=" + cantidadActual +
 				", stockMinimo=" + stockMinimo +
+				", stockMaximo=" + stockMaximo +
 				", ubicacion='" + ubicacion + '\'' +
 				'}';
 	}
@@ -79,12 +90,12 @@ public class StockMateriaPrima {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		StockMateriaPrima that = (StockMateriaPrima) o;
-		return Objects.equals(idStockMateriaPrima, that.idStockMateriaPrima);
+		Stock stock = (Stock) o;
+		return Objects.equals(idStock, stock.idStock);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idStockMateriaPrima);
+		return Objects.hash(idStock);
 	}
 }
