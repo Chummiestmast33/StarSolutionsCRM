@@ -78,7 +78,7 @@ class OrdenProduccionTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         OrdenProduccion o = new OrdenProduccion();
         o.setIdOrdenProd(5);
         o.setEstado("En Proceso");

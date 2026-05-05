@@ -64,7 +64,7 @@ class MateriaPrimaTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         MateriaPrima m = new MateriaPrima(1, "Acero", "kg", "desc", true);
         String s = m.toString();
         assertTrue(s.contains("Acero"));

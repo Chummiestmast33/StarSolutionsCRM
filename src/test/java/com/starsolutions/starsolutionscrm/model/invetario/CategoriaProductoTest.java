@@ -66,7 +66,7 @@ class CategoriaProductoTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         CategoriaProducto c = new CategoriaProducto(1, "Electrónica", "desc", true);
         String s = c.toString();
         assertTrue(s.contains("Electrónica"));

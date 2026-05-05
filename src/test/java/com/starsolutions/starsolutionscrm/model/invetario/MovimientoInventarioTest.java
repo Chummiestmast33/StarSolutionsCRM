@@ -77,7 +77,7 @@ class MovimientoInventarioTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         LocalDate fecha = LocalDate.of(2026, 1, 15);
         MovimientoInventario m = new MovimientoInventario(1, 2, 3, "ENTRADA", 100, fecha, "REF");
         String s = m.toString();

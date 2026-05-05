@@ -109,7 +109,7 @@ class OrdenProduccionDAOImplTest {
     }
 
     @Test
-    void crearOrdenDeberiaUsarEstadoEnProcesoporDefecto() throws Exception {
+    void crearOrdenDeberiaUsarEstadoEnProcesoPorDefecto() throws Exception {
         OrdenProduccion o = buildOrden(10, null);
         dao.crear(o);
 

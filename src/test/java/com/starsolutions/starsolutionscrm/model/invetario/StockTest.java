@@ -74,7 +74,7 @@ class StockTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         Stock s = new Stock(1, 2, 50, 10, 200, "Almacén A");
         String str = s.toString();
         assertTrue(str.contains("50"));

@@ -82,7 +82,7 @@ class ProductoTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         Producto p = new Producto(1, "Widget", "desc", new BigDecimal("9.99"), 2, true);
         String s = p.toString();
         assertTrue(s.contains("Widget"));

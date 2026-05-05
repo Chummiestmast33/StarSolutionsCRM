@@ -52,7 +52,7 @@ class NominaTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         LocalDate periodo = LocalDate.of(2026, 5, 1);
         Nomina n = new Nomina(1, 2, 10000.0, 200.0, 9800.0, periodo);
         String s = n.toString();

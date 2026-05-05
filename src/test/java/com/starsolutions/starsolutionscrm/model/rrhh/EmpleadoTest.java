@@ -51,7 +51,7 @@ class EmpleadoTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         Empleado e = new Empleado(2, "María", "x", 0, 0, "Inventario", false);
         String s = e.toString();
         assertTrue(s.contains("2"));

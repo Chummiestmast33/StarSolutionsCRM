@@ -64,7 +64,7 @@ class StockMateriaPrimaTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         StockMateriaPrima s = new StockMateriaPrima(1, 2, 300, 50, "Bodega 1");
         String str = s.toString();
         assertTrue(str.contains("300"));

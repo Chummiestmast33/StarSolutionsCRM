@@ -63,7 +63,7 @@ class AsistenciaTest {
     }
 
     @Test
-    void toStringDeberiaContenercamposClave() {
+    void toStringDeberiaContenerCamposClave() {
         LocalDate fecha = LocalDate.of(2026, 5, 5);
         Asistencia a = new Asistencia(1, 2, fecha, LocalTime.of(8, 0), null);
         String s = a.toString();
