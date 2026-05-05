@@ -44,12 +44,16 @@ public final class H2TestHelper {
         try (Statement s = conn.createStatement()) {
             s.execute("SET REFERENTIAL_INTEGRITY FALSE");
             String[] tables = {
+                "prd_orden_detalle",
                 "prd_orden_produccion",
+                "inv_movimiento", "inv_movimiento_mp",
+                "inv_stock_mp", "inv_stock",
+                "inv_materia_prima", "inv_producto",
                 "rh_nomina", "rh_asistencia",
                 "rh_empleado_ventas", "rh_empleado_rh",
                 "rh_empleado_inventario", "rh_empleado_produccion",
                 "rh_empleado",
-                "inv_stock", "inv_producto", "cat_categoria_producto"
+                "cat_categoria_producto"
             };
             for (String t : tables) {
                 s.execute("DROP TABLE IF EXISTS " + t);
@@ -163,6 +167,64 @@ public final class H2TestHelper {
                     ubicacion       VARCHAR(100) NULL,
                     CONSTRAINT fk_stk_prod FOREIGN KEY (id_producto)
                         REFERENCES inv_producto(id_producto)
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS inv_movimiento (
+                    id_movimiento INT          AUTO_INCREMENT PRIMARY KEY,
+                    id_stock      INT          NOT NULL,
+                    id_emp_inv    INT          NULL,
+                    tipo          VARCHAR(10)  NOT NULL,
+                    cantidad      INT          NOT NULL,
+                    fecha         DATE         NOT NULL DEFAULT (CURRENT_DATE),
+                    referencia    VARCHAR(100) NULL,
+                    CONSTRAINT fk_mov_stk FOREIGN KEY (id_stock) REFERENCES inv_stock(id_stock),
+                    CONSTRAINT fk_mov_emp FOREIGN KEY (id_emp_inv) REFERENCES rh_empleado_inventario(num)
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS inv_materia_prima (
+                    id_materia  INT          AUTO_INCREMENT PRIMARY KEY,
+                    nombre      VARCHAR(100) NOT NULL,
+                    unidad      VARCHAR(20)  NOT NULL,
+                    descripcion VARCHAR(200) NULL,
+                    activo      TINYINT(1)   NOT NULL DEFAULT 1
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS inv_stock_mp (
+                    id_stock_mp     INT          AUTO_INCREMENT PRIMARY KEY,
+                    id_materia      INT          NOT NULL,
+                    cantidad_actual INT          NOT NULL DEFAULT 0,
+                    stock_minimo    INT          NOT NULL DEFAULT 0,
+                    ubicacion       VARCHAR(100) NULL,
+                    CONSTRAINT fk_smp_mat FOREIGN KEY (id_materia) REFERENCES inv_materia_prima(id_materia)
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS inv_movimiento_mp (
+                    id_mov_mp   INT          AUTO_INCREMENT PRIMARY KEY,
+                    id_stock_mp INT          NOT NULL,
+                    tipo        VARCHAR(10)  NOT NULL,
+                    cantidad    INT          NOT NULL,
+                    fecha       DATE         NOT NULL DEFAULT (CURRENT_DATE),
+                    referencia  VARCHAR(100) NULL,
+                    CONSTRAINT fk_mmp_stk FOREIGN KEY (id_stock_mp) REFERENCES inv_stock_mp(id_stock_mp)
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS prd_orden_detalle (
+                    id_det_prod        INT AUTO_INCREMENT PRIMARY KEY,
+                    id_orden_prod      INT NOT NULL,
+                    id_materia         INT NULL,
+                    id_producto        INT NOT NULL,
+                    cantidad_mp_usada  INT NOT NULL,
+                    cantidad_producida INT NOT NULL
                 )
                 """);
 

@@ -23,6 +23,11 @@ module com.starsolutions.starsolutionscrm {
     opens com.starsolutions.starsolutionscrm.model.compras to javafx.base;
     opens com.starsolutions.starsolutionscrm.model.inventario to javafx.base;
 
+    // Aperturas necesarias para que las pruebas puedan acceder por reflexión a DAOs y modelos
+    opens com.starsolutions.starsolutionscrm.dao.impl;
+    opens com.starsolutions.starsolutionscrm.dao.interfaces;
+    opens com.starsolutions.starsolutionscrm.database;
+
     exports com.starsolutions.starsolutionscrm;
     exports com.starsolutions.starsolutionscrm.database;
 }
