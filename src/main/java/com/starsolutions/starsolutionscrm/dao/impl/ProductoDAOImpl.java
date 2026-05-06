@@ -84,6 +84,21 @@ public class ProductoDAOImpl implements IProductoDAO {
         return true;
     }
 
+  @Override
+  public boolean actualizar(Producto producto) throws SQLException {
+    String sql = "UPDATE inv_producto SET nombre = ?, descripcion = ?, precio_unitario = ?, id_categoria = ?, activo = ? WHERE id_producto = ?";
+
+    try (PreparedStatement ps = getConn().prepareStatement(sql)) {
+      ps.setString(1, producto.getNombre());
+      ps.setString(2, producto.getDescripcion());
+      ps.setBigDecimal(3, producto.getPrecioUnitario());
+      ps.setInt(4, producto.getIdCategoria());
+      ps.setBoolean(5, producto.isActivo());
+      ps.setInt(6, producto.getIdProducto());
+      return ps.executeUpdate() > 0;
+    }
+  }
+
 
     @Override
     public boolean desactivar(int idProducto) throws SQLException {

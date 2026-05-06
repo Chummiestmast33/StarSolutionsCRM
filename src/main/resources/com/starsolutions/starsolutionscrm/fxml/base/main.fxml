@@ -65,6 +65,14 @@
             <Button fx:id="btnDevoluciones" text="↩️  Devoluciones" onAction="#onDevoluciones" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
             <Button fx:id="btnPromociones" text="🏷️  Promociones" onAction="#onPromociones" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
 
+            <Separator style="-fx-padding: 5 0 5 0;"/>
+
+            <Label text="Inventario y Compras" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #888888;"/>
+            <Button fx:id="btnProductos" text="📦  Productos" onAction="#onProductos" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+            <Button fx:id="btnStock" text="📊  Consulta Stock" onAction="#onStock" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+            <Button fx:id="btnAjusteStock" text="⚙️  Ajuste Stock" onAction="#onAjusteStock" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+            <Button fx:id="btnCompras" text="🧾  Compras" onAction="#onCompras" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+
         </VBox>
     </left>
 

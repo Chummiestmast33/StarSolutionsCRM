@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.compras.OrdenCompraNuevaController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="650.0" prefWidth="1100.0">
 
-</AnchorPane>
+    <top>
+        <VBox spacing="12" style="-fx-padding: 14; -fx-background-color: #f7f7f7;">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Nueva Orden de Compra" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Proveedor:"/>
+                <ComboBox fx:id="cmbProveedor" prefWidth="260"/>
+            </HBox>
+
+            <GridPane hgap="10" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints minWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="ID Producto" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtIdProducto" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Cantidad" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <TextField fx:id="txtCantidad" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                <Label text="Precio" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtPrecio" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button text="Agregar Detalle" onAction="#onAgregarDetalle"/>
+                <Button text="Quitar Detalle" onAction="#onQuitarDetalle"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Total:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblTotal" text="0.00" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="tablaDetalle">
+            <columns>
+                <TableColumn fx:id="colProducto" text="Producto" prefWidth="140"/>
+                <TableColumn fx:id="colCantidad" text="Cantidad" prefWidth="100"/>
+                <TableColumn fx:id="colRecibida" text="Recibida" prefWidth="100"/>
+                <TableColumn fx:id="colPrecio" text="Precio" prefWidth="120"/>
+                <TableColumn fx:id="colSubtotal" text="Subtotal" prefWidth="120"/>
+            </columns>
+            <placeholder>
+                <Label text="Agrega líneas a la orden"/>
+            </placeholder>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 14;">
+            <Button text="Cancelar" onAction="#onCancelar"/>
+            <Button text="Guardar Orden" onAction="#onGuardar" defaultButton="true"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

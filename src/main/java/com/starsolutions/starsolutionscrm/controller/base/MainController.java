@@ -23,6 +23,10 @@ public class MainController {
     @FXML private Button btnAsistencia;
     @FXML private Button btnProduccion;
     @FXML private Button btnProveedores;
+    @FXML private Button btnProductos;
+    @FXML private Button btnStock;
+    @FXML private Button btnAjusteStock;
+    @FXML private Button btnCompras;
 
     // Botones de CRM y Ventas
     @FXML private Button btnClientes;
@@ -56,6 +60,10 @@ public class MainController {
         btnAsistencia.setVisible(false);
         btnProduccion.setVisible(false);
         btnProveedores.setVisible(false);
+        btnProductos.setVisible(false);
+        btnStock.setVisible(false);
+        btnAjusteStock.setVisible(false);
+        btnCompras.setVisible(false);
 
         btnClientes.setVisible(false);
         btnClienteDescuento.setVisible(false);
@@ -79,6 +87,10 @@ public class MainController {
             }
             case "Inventario" -> {
                 btnProveedores.setVisible(true);
+                btnProductos.setVisible(true);
+                btnStock.setVisible(true);
+                btnAjusteStock.setVisible(true);
+                btnCompras.setVisible(true);
             }
             case "Ventas" -> {
                 btnClientes.setVisible(true);
@@ -110,6 +122,18 @@ public class MainController {
 
     @FXML
     public void onProveedores() { abrirVentana("crm/proveedor-lista.fxml", "Proveedores"); }
+
+    @FXML
+    public void onProductos() { abrirVentana("inv/producto-lista.fxml", "Productos"); }
+
+    @FXML
+    public void onStock() { abrirVentana("inv/stock-consulta.fxml", "Consulta de Stock"); }
+
+    @FXML
+    public void onAjusteStock() { abrirVentana("inv/stock-ajuste.fxml", "Ajuste de Inventario"); }
+
+    @FXML
+    public void onCompras() { abrirVentana("cpm/orden-compra-lista.fxml", "Compras"); }
 
     @FXML
     public void onClientes() { abrirVentana("crm/cliente-lista.fxml", "Clientes"); }

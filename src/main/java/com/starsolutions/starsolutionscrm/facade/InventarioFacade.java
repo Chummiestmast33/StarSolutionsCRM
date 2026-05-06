@@ -23,8 +23,16 @@ public class InventarioFacade {
 	private final MateriaPrimaDAOImpl materiaDAO = new MateriaPrimaDAOImpl();
 
 	// ---------------------- Producto ---------------------------------
+	public Producto buscarProducto(int idProducto) throws SQLException {
+		return productoDAO.obtenerPorId(idProducto);
+	}
+
 	public List<Producto> buscarProductosPorNombre(String nombre) throws SQLException {
 		return productoDAO.buscarPorNombre(nombre);
+	}
+
+	public List<Producto> buscarProductoPorNombre(String nombre) throws SQLException {
+		return buscarProductosPorNombre(nombre);
 	}
 
 	public List<Producto> buscarProductosPorCategoria(int idCategoria) throws SQLException {
@@ -33,6 +41,10 @@ public class InventarioFacade {
 
 	public boolean altaProducto(Producto producto) throws SQLException {
 		return productoDAO.alta(producto);
+	}
+
+	public boolean actualizarProducto(Producto producto) throws SQLException {
+		return productoDAO.actualizar(producto);
 	}
 
 	public boolean desactivarProducto(int idProducto) throws SQLException {
@@ -45,6 +57,10 @@ public class InventarioFacade {
 
 	public Producto obtenerProductoPorId(int idProducto) throws SQLException {
 		return productoDAO.obtenerPorId(idProducto);
+	}
+
+	public List<Producto> listarProductos() throws SQLException {
+		return productoDAO.listarActivos();
 	}
 
 	public List<Producto> listarProductosActivos() throws SQLException {
@@ -62,6 +78,18 @@ public class InventarioFacade {
 
 	public int registrarMovimiento(MovimientoInventario movimiento) throws SQLException {
 		return stockDAO.registrarMovimiento(movimiento);
+	}
+
+	public int ajustarInventario(MovimientoInventario movimiento) throws SQLException {
+		return registrarMovimiento(movimiento);
+	}
+
+	public List<Stock> consultarStock(int idProducto) throws SQLException {
+		return stockDAO.listarStockPorProducto(idProducto);
+	}
+
+	public Stock consultarStockPorUbicacion(int idProducto, String ubicacion) throws SQLException {
+		return stockDAO.obtenerStockPorUbicacion(idProducto, ubicacion);
 	}
 
 	public Stock obtenerStockPorUbicacion(int idProducto, String ubicacion) throws SQLException {

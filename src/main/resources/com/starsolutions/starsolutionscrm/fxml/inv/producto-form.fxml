@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.inventario.ProductoFormController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.starsolutions.starsolutionscrm.controller.inventario.ProductoFormController"
+      prefWidth="420.0" spacing="12"
+      style="-fx-padding: 24;">
 
-</AnchorPane>
+    <Label text="Formulario de Producto" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="110"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtId" editable="false" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Nombre" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtNombre" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Descripción" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtDescripcion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Precio" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtPrecio" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Categoría" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtCategoria" promptText="ID categoría" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="Activo" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <CheckBox fx:id="chkActivo" text="Sí" selected="true" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Cancelar" onAction="#onCancelar"/>
+        <Button text="Guardar" onAction="#onGuardar" defaultButton="true" style="-fx-font-weight: bold;"/>
+    </HBox>
+
+</VBox>

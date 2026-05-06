@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.inventario.StockConsultaController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="560.0" prefWidth="900.0">
 
-</AnchorPane>
+    <top>
+        <VBox spacing="10" style="-fx-padding: 14; -fx-background-color: #f7f7f7;">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Consulta de Stock" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="txtIdProducto" promptText="ID del producto" prefWidth="180"/>
+                <Button text="Consultar" onAction="#onConsultar"/>
+                <Button text="Refrescar" onAction="#onRefrescar"/>
+            </HBox>
+            <Label fx:id="lblEstado" text="Ingresa un producto para consultar el stock" style="-fx-padding: 6 10 6 10; -fx-background-color: #607d8b; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="tablaStock">
+            <columns>
+                <TableColumn fx:id="colIdStock" text="ID Stock" prefWidth="90"/>
+                <TableColumn fx:id="colProducto" text="Producto" prefWidth="90"/>
+                <TableColumn fx:id="colCantidad" text="Cantidad actual" prefWidth="130"/>
+                <TableColumn fx:id="colMinimo" text="Stock mínimo" prefWidth="120"/>
+                <TableColumn fx:id="colMaximo" text="Stock máximo" prefWidth="120"/>
+                <TableColumn fx:id="colUbicacion" text="Ubicación" prefWidth="220"/>
+            </columns>
+            <placeholder>
+                <Label text="No hay resultados aún"/>
+            </placeholder>
+        </TableView>
+    </center>
+
+</BorderPane>

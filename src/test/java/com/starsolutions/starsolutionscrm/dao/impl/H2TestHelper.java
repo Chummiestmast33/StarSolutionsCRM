@@ -44,6 +44,9 @@ public final class H2TestHelper {
         try (Statement s = conn.createStatement()) {
             s.execute("SET REFERENTIAL_INTEGRITY FALSE");
             String[] tables = {
+                "cmp_detalle_orden",
+                "cmp_orden_compra",
+                "crm_proveedor",
                 "prd_orden_detalle",
                 "prd_orden_produccion",
                 "inv_movimiento", "inv_movimiento_mp",
@@ -216,6 +219,44 @@ public final class H2TestHelper {
                     CONSTRAINT fk_mmp_stk FOREIGN KEY (id_stock_mp) REFERENCES inv_stock_mp(id_stock_mp)
                 )
                 """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS crm_proveedor (
+                    id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
+                    nombre       VARCHAR(120) NOT NULL,
+                    rfc          VARCHAR(20) NULL,
+                    direccion    VARCHAR(200) NULL,
+                    activo       TINYINT(1) NOT NULL DEFAULT 1
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS cmp_orden_compra (
+                    id_orden     INT AUTO_INCREMENT PRIMARY KEY,
+                    id_proveedor INT NOT NULL,
+                    id_empleado  INT NOT NULL,
+                    fecha        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    estado       VARCHAR(25) NOT NULL DEFAULT 'Pendiente',
+                    total        DECIMAL(12,2) NOT NULL DEFAULT 0,
+                    CONSTRAINT fk_oc_prov FOREIGN KEY (id_proveedor) REFERENCES crm_proveedor(id_proveedor),
+                    CONSTRAINT fk_oc_emp FOREIGN KEY (id_empleado) REFERENCES rh_empleado_inventario(num)
+                )
+                """);
+
+            s.execute("""
+                CREATE TABLE IF NOT EXISTS cmp_detalle_orden (
+                    id_orden          INT NOT NULL,
+                    id_producto       INT NOT NULL,
+                    cantidad_pedida   INT NOT NULL,
+                    cantidad_recibida INT NOT NULL DEFAULT 0,
+                    precio_unitario   DECIMAL(10,2) NOT NULL,
+                    PRIMARY KEY (id_orden, id_producto),
+                    CONSTRAINT fk_doc_ord FOREIGN KEY (id_orden) REFERENCES cmp_orden_compra(id_orden),
+                    CONSTRAINT fk_doc_prod FOREIGN KEY (id_producto) REFERENCES inv_producto(id_producto)
+                )
+                """);
+
+            s.execute("CREATE TRIGGER IF NOT EXISTS trg_actualiza_stock AFTER INSERT ON inv_movimiento FOR EACH ROW CALL \"com.starsolutions.starsolutionscrm.dao.impl.H2StockUpdateTrigger\"");
 
             s.execute("""
                 CREATE TABLE IF NOT EXISTS prd_orden_detalle (

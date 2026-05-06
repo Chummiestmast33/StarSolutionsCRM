@@ -32,6 +32,13 @@ public interface IProductoDAO {
     boolean alta(Producto producto) throws SQLException;
 
     /**
+     * Actualiza un producto existente.
+     * @param producto Objeto con idProducto existente y datos nuevos.
+     * @return true si la actualización fue exitosa.
+     */
+    boolean actualizar(Producto producto) throws SQLException;
+
+    /**
      * Desactiva un producto (baja lógica). Setea activo=0, no elimina registro.
      * @param idProducto ID del producto a desactivar
      * @return true si la actualización fue exitosa, false si el producto no existe
