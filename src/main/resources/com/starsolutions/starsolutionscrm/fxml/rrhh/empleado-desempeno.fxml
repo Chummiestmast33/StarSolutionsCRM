@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.rrhh.EmpleadoDesempenoController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="540.0" prefWidth="800.0"
+            style="-fx-background-color: #F8F8F8;">
 
-</AnchorPane>
+    <top>
+        <VBox style="-fx-background-color: #ffffff;
+                     -fx-border-color: #E5E5E5;
+                     -fx-border-width: 0 0 1 0;"
+              spacing="10">
+            <padding>
+                <Insets top="12" right="20" bottom="12" left="20"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <FontIcon iconLiteral="fltfal-calendar-24" iconSize="20" iconColor="#005FB8"/>
+                <Label text="Asistencia"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Refrescar" onAction="#onRefrescar">
+                    <graphic><FontIcon iconLiteral="fltfmz-settings-24" iconSize="14"/></graphic>
+                </Button>
+            </HBox>
+
+            <HBox fx:id="panelFiltroRH" alignment="CENTER_LEFT" spacing="8">
+                <FontIcon iconLiteral="fltfmz-person-24" iconSize="16" iconColor="#666666"/>
+                <Label text="Ver empleado:" style="-fx-text-fill: #555555;"/>
+                <TextField fx:id="txtFiltroEmpleado"
+                           promptText="Núm. empleado"
+                           prefWidth="130"
+                           onAction="#onBuscarEmpleado"/>
+                <Button text="Buscar" onAction="#onBuscarEmpleado">
+                    <graphic><FontIcon iconLiteral="fltfmz-people-24" iconSize="14"/></graphic>
+                </Button>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="16" style="-fx-background-color: #F8F8F8;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <VBox spacing="12"
+                  style="-fx-background-color: #ffffff;
+                         -fx-border-color: #E5E5E5;
+                         -fx-border-width: 1;
+                         -fx-border-radius: 6;
+                         -fx-background-radius: 6;">
+                <padding>
+                    <Insets top="16" right="20" bottom="16" left="20"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fltfal-history-24" iconSize="16" iconColor="#005FB8"/>
+                    <Label text="Hoy"
+                           style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                </HBox>
+
+                <Separator/>
+
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Label fx:id="lblEstadoHoy"
+                           text="Cargando..."
+                           style="-fx-font-size: 13px; -fx-text-fill: #555555;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnEntrada"
+                            text="Registrar Entrada"
+                            onAction="#onRegistrarEntrada"
+                            style="-fx-background-color: #0078D4; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-background-radius: 4;">
+                        <graphic><FontIcon iconLiteral="fltfal-add-24" iconSize="16" iconColor="white"/></graphic>
+                    </Button>
+                    <Button fx:id="btnSalida"
+                            text="Registrar Salida"
+                            onAction="#onRegistrarSalida"
+                            style="-fx-background-color: #d13438; -fx-text-fill: white;
+                                   -fx-font-weight: bold; -fx-background-radius: 4;">
+                        <graphic><FontIcon iconLiteral="fltfal-delete-24" iconSize="16" iconColor="white"/></graphic>
+                    </Button>
+                </HBox>
+
+            </VBox>
+
+            <VBox spacing="8" VBox.vgrow="ALWAYS"
+                  style="-fx-background-color: #ffffff;
+                         -fx-border-color: #E5E5E5;
+                         -fx-border-width: 1;
+                         -fx-border-radius: 6;
+                         -fx-background-radius: 6;">
+                <padding>
+                    <Insets top="16" right="20" bottom="16" left="20"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <FontIcon iconLiteral="fltfal-calendar-24" iconSize="16" iconColor="#005FB8"/>
+                    <Label text="Historial de asistencia"
+                           style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                </HBox>
+
+                <Separator/>
+
+                <TableView fx:id="tablaAsistencia" VBox.vgrow="ALWAYS"
+                           style="-fx-border-color: transparent;">
+                    <columns>
+                        <TableColumn fx:id="colId"       text="ID"       prefWidth="60"/>
+                        <TableColumn fx:id="colEmpleado" text="Empleado" prefWidth="100"/>
+                        <TableColumn fx:id="colFecha"    text="Fecha"    prefWidth="150"/>
+                        <TableColumn fx:id="colEntrada"  text="Entrada"  prefWidth="150"/>
+                        <TableColumn fx:id="colSalida"   text="Salida"   prefWidth="150"/>
+                    </columns>
+                    <placeholder>
+                        <VBox alignment="CENTER" spacing="8">
+                            <FontIcon iconLiteral="fltfal-calendar-24" iconSize="36" iconColor="#CCCCCC"/>
+                            <Label text="No hay registros de asistencia."
+                                   style="-fx-text-fill: #999999;"/>
+                        </VBox>
+                    </placeholder>
+                </TableView>
+
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
