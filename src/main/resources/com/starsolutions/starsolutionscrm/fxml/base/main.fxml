@@ -51,11 +51,9 @@
             </padding>
 
             <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" style="-fx-background-color: transparent;">
-                <VBox spacing="4" style="-fx-background-color: transparent;">
+                <VBox spacing="2" style="-fx-background-color: transparent;">
 
-                    <Label fx:id="lblModulos" text="MODULOS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #888888;">
-                        <padding><Insets left="8" bottom="4" top="8"/></padding>
-                    </Label>
+                    <!-- Menu items in a continuous list (no header labels) -->
                     <Button fx:id="btnEmpleados" text="Empleados" onAction="#onEmpleados" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
                         <graphic><FontIcon iconLiteral="fltfmz-person-24" iconSize="18"/></graphic>
                     </Button>
@@ -84,9 +82,8 @@
                         <graphic><FontIcon iconLiteral="fltfmz-reciept-24" iconSize="18"/></graphic>
                     </Button>
 
-                    <Label fx:id="lblCRM" text="CRM Y VENTAS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #888888;">
-                        <padding><Insets left="8" bottom="4" top="8"/></padding>
-                    </Label>
+                    <Separator />
+
                     <Button fx:id="btnClientes" text="Clientes" onAction="#onClientes" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
                         <graphic><FontIcon iconLiteral="fltfmz-people-24" iconSize="18"/></graphic>
                     </Button>

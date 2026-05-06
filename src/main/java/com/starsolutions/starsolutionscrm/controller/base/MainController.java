@@ -23,8 +23,6 @@ public class MainController {
     @FXML private VBox sideMenu;
     @FXML private StackPane contentArea;
     @FXML private Button btnMenuToggle;
-    @FXML private Label lblModulos;
-    @FXML private Label lblCRM;
 
     // Botones Generales
     @FXML private Button btnEmpleados;
@@ -68,17 +66,9 @@ public class MainController {
         menuExpanded = !menuExpanded;
         if (menuExpanded) {
             sideMenu.setPrefWidth(220);
-            lblModulos.setVisible(true);
-            lblModulos.setManaged(true);
-            lblCRM.setVisible(true);
-            lblCRM.setManaged(true);
             ocultarTextoBotones(false);
         } else {
             sideMenu.setPrefWidth(60);
-            lblModulos.setVisible(false);
-            lblModulos.setManaged(false);
-            lblCRM.setVisible(false);
-            lblCRM.setManaged(false);
             ocultarTextoBotones(true);
         }
     }
@@ -105,22 +95,22 @@ public class MainController {
 
     // Metodo para ocultar/mostrar botones segun el area de trabajo
     private void configurarAccesoPorRol(String tipo) {
-        // 1. Ocultar todos los botones primero
+        // 1. Ocultar todos los botones primero (also set managed=false so layout collapses)
         btnEmpleados.setVisible(false); btnEmpleados.setManaged(false);
-        btnNomina.setVisible(false);
-        btnAsistencia.setVisible(false);
-        btnProduccion.setVisible(false);
-        btnProveedores.setVisible(false);
-        btnProductos.setVisible(false);
-        btnStock.setVisible(false);
-        btnAjusteStock.setVisible(false);
-        btnCompras.setVisible(false);
+        btnNomina.setVisible(false); btnNomina.setManaged(false);
+        btnAsistencia.setVisible(false); btnAsistencia.setManaged(false);
+        btnProduccion.setVisible(false); btnProduccion.setManaged(false);
+        btnProveedores.setVisible(false); btnProveedores.setManaged(false);
+        btnProductos.setVisible(false); btnProductos.setManaged(false);
+        btnStock.setVisible(false); btnStock.setManaged(false);
+        btnAjusteStock.setVisible(false); btnAjusteStock.setManaged(false);
+        btnCompras.setVisible(false); btnCompras.setManaged(false);
 
-        btnClientes.setVisible(false);
-        btnClienteDescuento.setVisible(false);
-        btnVentas.setVisible(false);
-        btnHistorial.setVisible(false);
-        btnCobros.setVisible(false);
+        btnClientes.setVisible(false); btnClientes.setManaged(false);
+        btnClienteDescuento.setVisible(false); btnClienteDescuento.setManaged(false);
+        btnVentas.setVisible(false); btnVentas.setManaged(false);
+        btnHistorial.setVisible(false); btnHistorial.setManaged(false);
+        btnCobros.setVisible(false); btnCobros.setManaged(false);
         btnDevoluciones.setVisible(false); btnDevoluciones.setManaged(false);
         btnPromociones.setVisible(false); btnPromociones.setManaged(false);
 

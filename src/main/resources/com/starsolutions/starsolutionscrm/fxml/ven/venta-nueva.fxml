@@ -49,12 +49,12 @@
             <!-- Product Search input bar -->
             <HBox spacing="10" alignment="BOTTOM_LEFT">
                 <VBox spacing="4">
-                    <Label text="Código de Producto" style="-fx-text-fill: #666666;"/>
-                    <TextField fx:id="txtIdProducto" prefWidth="200" promptText="Ej. 1001"/>
+                    <Label text="Producto" style="-fx-text-fill: #666666; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbProducto" prefWidth="260" promptText="Buscar o seleccionar producto..."/>
                 </VBox>
                 <VBox spacing="4">
-                    <Label text="Cant." style="-fx-text-fill: #666666;"/>
-                    <TextField fx:id="txtCantidad" prefWidth="70" text="1" alignment="CENTER"/>
+                    <Label text="Cantidad" style="-fx-text-fill: #666666; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbCantidad" prefWidth="80" promptText="1"/>
                 </VBox>
                 <Button text="Agregar al Ticket" onAction="#onAgregarProducto" prefHeight="32">
                     <graphic>

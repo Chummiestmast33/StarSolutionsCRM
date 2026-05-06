@@ -2,8 +2,10 @@ package com.starsolutions.starsolutionscrm.controller.ventas;
 
 import com.starsolutions.starsolutionscrm.dao.impl.ClienteDAOImpl;
 import com.starsolutions.starsolutionscrm.facade.VentasFacade;
+import com.starsolutions.starsolutionscrm.facade.InventarioFacade;
 import com.starsolutions.starsolutionscrm.model.crm.Cliente;
 import com.starsolutions.starsolutionscrm.model.inventario.Producto;
+import com.starsolutions.starsolutionscrm.model.inventario.Stock;
 import com.starsolutions.starsolutionscrm.model.ventas.Venta;
 import com.starsolutions.starsolutionscrm.model.ventas.VentaDetalle;
 import com.starsolutions.starsolutionscrm.util.AlertUtil;
@@ -24,8 +26,9 @@ public class VentaNuevaController {
     // Componentes de la interfaz FXML
     @FXML private ComboBox<Cliente> cmbCliente;
     @FXML private ComboBox<String> cmbTipoPago;
-    @FXML private TextField txtIdProducto;
-    @FXML private TextField txtCantidad;
+    @FXML private ComboBox<Producto> cmbProducto;
+    @FXML private ComboBox<Integer> cmbCantidad;
+    private final InventarioFacade inventarioFacade = new InventarioFacade();
 
     // Tabla del carrito de compras
     @FXML private TableView<VentaDetalle> tablaDetalles;
@@ -55,6 +58,7 @@ public class VentaNuevaController {
 
         tablaDetalles.setItems(listaDetalles);
         cargarClientes();
+        cargarProductos();
 
         // Cargar opciones de pago
         if (cmbTipoPago != null) {
@@ -83,39 +87,64 @@ public class VentaNuevaController {
         }
     }
 
+    private void cargarProductos() {
+        try {
+            ObservableList<Producto> productos = FXCollections.observableArrayList(inventarioFacade.listarProductos());
+            cmbProducto.setItems(productos);
+            cmbProducto.setConverter(new StringConverter<Producto>() {
+                @Override
+                public String toString(Producto p) { return p == null ? "" : p.getIdProducto() + " - " + p.getNombre(); }
+                @Override
+                public Producto fromString(String string) { return null; }
+            });
+
+            cmbProducto.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal == null) {
+                    cmbCantidad.getItems().clear();
+                    return;
+                }
+                try {
+                    java.util.List<Stock> stocks = inventarioFacade.listarStockPorProducto(newVal.getIdProducto());
+                    int total = stocks.stream().mapToInt(Stock::getCantidadActual).sum();
+                    ObservableList<Integer> cantidades = FXCollections.observableArrayList();
+                    for (int i = 1; i <= Math.max(1, total); i++) {
+                        cantidades.add(i);
+                    }
+                    cmbCantidad.setItems(cantidades);
+                    cmbCantidad.getSelectionModel().selectFirst();
+                } catch (Exception e) {
+                    cmbCantidad.getItems().clear();
+                }
+            });
+
+        } catch (Exception e) {
+            AlertUtil.error("Error BD", "Error al cargar el catalogo de productos.");
+        }
+    }
+
     @FXML
     public void onAgregarProducto() {
-        String idTxt = txtIdProducto.getText().trim();
-        String cantTxt = txtCantidad.getText().trim();
+        Producto seleccionado = cmbProducto.getValue();
+        Integer cantidad = cmbCantidad.getValue();
 
-        if (idTxt.isEmpty() || cantTxt.isEmpty()) {
-            AlertUtil.error("Validacion", "Ingresa el codigo del producto y la cantidad.");
+        if (seleccionado == null || cantidad == null || cantidad <= 0) {
+            AlertUtil.error("Validacion", "Selecciona un producto y una cantidad valida.");
             return;
         }
 
         try {
-            int idProd = Integer.parseInt(idTxt);
-            int cantidad = Integer.parseInt(cantTxt);
-
-            if (cantidad <= 0) return;
-
-            Producto p = facade.buscarProducto(idProd);
-
-            if (p == null || !p.isActivo()) {
-                AlertUtil.error("Error", "El producto no existe o esta inactivo.");
+            boolean disponible = inventarioFacade.verificarDisponibilidadTotalProducto(seleccionado.getIdProducto(), cantidad);
+            if (!disponible) {
+                AlertUtil.error("Stock insuficiente", "No hay suficiente inventario para la cantidad seleccionada.");
                 return;
             }
 
-            // Agregamos al carrito y recalculamos totales
-            VentaDetalle detalle = new VentaDetalle(idProd, cantidad, p.getPrecioUnitario());
+            VentaDetalle detalle = new VentaDetalle(seleccionado.getIdProducto(), cantidad, seleccionado.getPrecioUnitario());
             listaDetalles.add(detalle);
 
-            txtIdProducto.clear();
-            txtCantidad.setText("1");
+            cmbProducto.getSelectionModel().clearSelection();
+            cmbCantidad.getSelectionModel().clearSelection();
             recalcularTotalesVisuales();
-
-        } catch (NumberFormatException e) {
-            AlertUtil.error("Error", "Los campos requieren valores numericos enteros.");
         } catch (Exception e) {
             AlertUtil.error("Error del sistema", e.getMessage());
         }
