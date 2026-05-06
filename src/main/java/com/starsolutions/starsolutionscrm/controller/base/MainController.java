@@ -5,9 +5,12 @@ import com.starsolutions.starsolutionscrm.util.SessionManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +19,12 @@ public class MainController {
 
     @FXML private Label lblBienvenida;
     @FXML private Label lblRol;
+    
+    @FXML private VBox sideMenu;
+    @FXML private StackPane contentArea;
+    @FXML private Button btnMenuToggle;
+    @FXML private Label lblModulos;
+    @FXML private Label lblCRM;
 
     // Botones Generales
     @FXML private Button btnEmpleados;
@@ -38,24 +47,66 @@ public class MainController {
     @FXML private Button btnPromociones;
 
     private static final String BASE_FXML = "/com/starsolutions/starsolutionscrm/fxml/";
+    private boolean menuExpanded = true;
 
     @FXML
     public void initialize() {
         SessionManager session = SessionManager.getInstance();
-        String nombre = session.getEmpleadoActual().getNombre();
-        String tipo   = session.getTipoEmpleado();
+        if(session.getEmpleadoActual() != null) {
+            String nombre = session.getEmpleadoActual().getNombre();
+            String tipo   = session.getTipoEmpleado();
 
-        lblBienvenida.setText("Bienvenido, " + nombre);
-        lblRol.setText("Rol: " + tipo);
+            lblBienvenida.setText(nombre);
+            lblRol.setText(tipo);
 
-        // Control de acceso al menú lateral
-        configurarAccesoPorRol(tipo);
+            configurarAccesoPorRol(tipo);
+        }
+    }
+
+    @FXML
+    public void onToggleMenu() {
+        menuExpanded = !menuExpanded;
+        if (menuExpanded) {
+            sideMenu.setPrefWidth(220);
+            lblModulos.setVisible(true);
+            lblModulos.setManaged(true);
+            lblCRM.setVisible(true);
+            lblCRM.setManaged(true);
+            ocultarTextoBotones(false);
+        } else {
+            sideMenu.setPrefWidth(60);
+            lblModulos.setVisible(false);
+            lblModulos.setManaged(false);
+            lblCRM.setVisible(false);
+            lblCRM.setManaged(false);
+            ocultarTextoBotones(true);
+        }
+    }
+
+    private void ocultarTextoBotones(boolean ocultar) {
+        btnEmpleados.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnNomina.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnAsistencia.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnProduccion.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnProveedores.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnProductos.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnStock.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnAjusteStock.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnCompras.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        
+        btnClientes.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnClienteDescuento.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnVentas.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnHistorial.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnCobros.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnDevoluciones.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
+        btnPromociones.setContentDisplay(ocultar ? javafx.scene.control.ContentDisplay.GRAPHIC_ONLY : javafx.scene.control.ContentDisplay.LEFT);
     }
 
     // Metodo para ocultar/mostrar botones segun el area de trabajo
     private void configurarAccesoPorRol(String tipo) {
         // 1. Ocultar todos los botones primero
-        btnEmpleados.setVisible(false);
+        btnEmpleados.setVisible(false); btnEmpleados.setManaged(false);
         btnNomina.setVisible(false);
         btnAsistencia.setVisible(false);
         btnProduccion.setVisible(false);
@@ -70,36 +121,36 @@ public class MainController {
         btnVentas.setVisible(false);
         btnHistorial.setVisible(false);
         btnCobros.setVisible(false);
-        btnDevoluciones.setVisible(false);
-        btnPromociones.setVisible(false);
+        btnDevoluciones.setVisible(false); btnDevoluciones.setManaged(false);
+        btnPromociones.setVisible(false); btnPromociones.setManaged(false);
 
         // 2. Todos los empleados pueden registrar asistencia
-        btnAsistencia.setVisible(true);
+        btnAsistencia.setVisible(true); btnAsistencia.setManaged(true);
 
         // 3. Habilitar solo lo correspondiente al rol
         switch (tipo) {
             case "RH" -> {
-                btnEmpleados.setVisible(true);
-                btnNomina.setVisible(true);
+                btnEmpleados.setVisible(true); btnEmpleados.setManaged(true);
+                btnNomina.setVisible(true); btnNomina.setManaged(true);
             }
             case "Produccion" -> {
-                btnProduccion.setVisible(true);
+                btnProduccion.setVisible(true); btnProduccion.setManaged(true);
             }
             case "Inventario" -> {
-                btnProveedores.setVisible(true);
-                btnProductos.setVisible(true);
-                btnStock.setVisible(true);
-                btnAjusteStock.setVisible(true);
-                btnCompras.setVisible(true);
+                btnProveedores.setVisible(true); btnProveedores.setManaged(true);
+                btnProductos.setVisible(true); btnProductos.setManaged(true);
+                btnStock.setVisible(true); btnStock.setManaged(true);
+                btnAjusteStock.setVisible(true); btnAjusteStock.setManaged(true);
+                btnCompras.setVisible(true); btnCompras.setManaged(true);
             }
             case "Ventas" -> {
-                btnClientes.setVisible(true);
-                btnClienteDescuento.setVisible(true);
-                btnVentas.setVisible(true);
-                btnHistorial.setVisible(true);
-                btnCobros.setVisible(true);
-                btnDevoluciones.setVisible(true);
-                btnPromociones.setVisible(true);
+                btnClientes.setVisible(true); btnClientes.setManaged(true);
+                btnClienteDescuento.setVisible(true); btnClienteDescuento.setManaged(true);
+                btnVentas.setVisible(true); btnVentas.setManaged(true);
+                btnHistorial.setVisible(true); btnHistorial.setManaged(true);
+                btnCobros.setVisible(true); btnCobros.setManaged(true);
+                btnDevoluciones.setVisible(true); btnDevoluciones.setManaged(true);
+                btnPromociones.setVisible(true); btnPromociones.setManaged(true);
             }
         }
     }
@@ -109,52 +160,52 @@ public class MainController {
     // ==========================================================
 
     @FXML
-    public void onEmpleados() { abrirVentana("rrhh/empleado-lista.fxml", "Empleados"); }
+    public void onEmpleados() { cargarVista("rrhh/empleado-lista.fxml"); }
 
     @FXML
-    public void onNomina() { abrirVentana("rrhh/nomina-lista.fxml", "Nomina"); }
+    public void onNomina() { cargarVista("rrhh/nomina-lista.fxml"); }
 
     @FXML
-    public void onAsistencia() { abrirVentana("rrhh/empleado-desempeno.fxml", "Asistencia"); }
+    public void onAsistencia() { cargarVista("rrhh/empleado-desempeno.fxml"); }
 
     @FXML
-    public void onProduccion() { abrirVentana("prd/orden-produccion-lista.fxml", "Produccion"); }
+    public void onProduccion() { cargarVista("prd/orden-produccion-lista.fxml"); }
 
     @FXML
-    public void onProveedores() { abrirVentana("crm/proveedor-lista.fxml", "Proveedores"); }
+    public void onProveedores() { cargarVista("crm/proveedor-lista.fxml"); }
 
     @FXML
-    public void onProductos() { abrirVentana("inv/producto-lista.fxml", "Productos"); }
+    public void onProductos() { cargarVista("inv/producto-lista.fxml"); }
 
     @FXML
-    public void onStock() { abrirVentana("inv/stock-consulta.fxml", "Consulta de Stock"); }
+    public void onStock() { cargarVista("inv/stock-consulta.fxml"); }
 
     @FXML
-    public void onAjusteStock() { abrirVentana("inv/stock-ajuste.fxml", "Ajuste de Inventario"); }
+    public void onAjusteStock() { cargarVista("inv/stock-ajuste.fxml"); }
 
     @FXML
-    public void onCompras() { abrirVentana("cpm/orden-compra-lista.fxml", "Compras"); }
+    public void onCompras() { cargarVista("cpm/orden-compra-lista.fxml"); }
 
     @FXML
-    public void onClientes() { abrirVentana("crm/cliente-lista.fxml", "Clientes"); }
+    public void onClientes() { cargarVista("crm/cliente-lista.fxml"); }
 
     @FXML
-    public void onClienteDescuento() { abrirVentana("crm/cliente-descuento.fxml", "Descuentos VIP"); }
+    public void onClienteDescuento() { cargarVista("crm/cliente-descuento.fxml"); }
 
     @FXML
-    public void onVentas() { abrirVentana("ven/venta-nueva.fxml", "Terminal de Ventas"); }
+    public void onVentas() { cargarVista("ven/venta-nueva.fxml"); }
 
     @FXML
-    public void onHistorial() { abrirVentana("ven/venta-historial.fxml", "Historial de Ventas"); }
+    public void onHistorial() { cargarVista("ven/venta-historial.fxml"); }
 
     @FXML
-    public void onCobros() { abrirVentana("ven/venta-cobro.fxml", "Registrar Cobros"); }
+    public void onCobros() { cargarVista("ven/venta-cobro.fxml"); }
 
     @FXML
-    public void onDevoluciones() { abrirVentana("ven/devolucion-form.fxml", "Devoluciones"); }
+    public void onDevoluciones() { cargarVista("ven/devolucion-form.fxml"); }
 
     @FXML
-    public void onPromociones() { abrirVentana("ven/promocion-lista.fxml", "Promociones y Ofertas"); }
+    public void onPromociones() { cargarVista("ven/promocion-lista.fxml"); }
 
     // ==========================================================
     // SESION Y APERTURA DE VENTANAS
@@ -174,16 +225,15 @@ public class MainController {
         }
     }
 
-    // Metodo centralizado para abrir cualquier pantalla
-    private void abrirVentana(String rutaFxml, String titulo) {
+    // Metodo centralizado para cargar vistas en el area central
+    private void cargarVista(String rutaFxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(BASE_FXML + rutaFxml));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle(titulo);
-            stage.show();
+            Node vista = loader.load();
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(vista);
         } catch (Exception e) {
-            AlertUtil.error("Error de Interfaz", "Archivo no encontrado: " + rutaFxml);
+            System.err.println("No se pudo cargar la vista: " + rutaFxml);
             e.printStackTrace();
         }
     }

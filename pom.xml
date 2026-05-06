@@ -73,6 +73,25 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- AtlantaFX for Windows 11 Fluent Design Look -->
+        <dependency>
+            <groupId>io.github.mkpaz</groupId>
+            <artifactId>atlantafx-base</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <!-- Ikonli for Modern Icons -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fluentui-pack</artifactId>
+            <version>12.3.1</version>
+        </dependency>
     </dependencies>
 
 

@@ -6,6 +6,11 @@ module com.starsolutions.starsolutionscrm {
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
     requires java.sql;
+    
+    // New dependencies for UI Overhaul
+    requires atlantafx.base;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.fluentui;
 
     // Permisos para los Controladores (Para que JavaFX inyecte los @FXML y eventos)
     opens com.starsolutions.starsolutionscrm to javafx.fxml;

@@ -2,89 +2,129 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.base.MainController"
-            prefHeight="720.0" prefWidth="1280.0">
+            prefHeight="720.0" prefWidth="1280.0"
+            style="-fx-background-color: #F8F8F8;">
 
     <!-- Barra superior -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="16"
-              style="-fx-background-color: #2c3e50; -fx-padding: 12 20 12 20;">
+        <HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color: #ffffff; -fx-border-color: #E5E5E5; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets top="12" right="20" bottom="12" left="20"/>
+            </padding>
 
-            <Label text="Star Solutions CRM"
-                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <Button fx:id="btnMenuToggle" onAction="#onToggleMenu" styleClass="flat">
+                <graphic>
+                    <FontIcon iconLiteral="fltfmz-navigation-20" iconSize="20"/>
+                </graphic>
+            </Button>
 
-            <!-- Espacio flexible -->
+            <Label text="StarSolutions" style="-fx-font-family: 'Segoe UI Variable', 'Segoe UI', sans-serif; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+
             <Region HBox.hgrow="ALWAYS"/>
 
-            <VBox alignment="CENTER_RIGHT" spacing="2">
-                <Label fx:id="lblBienvenida"
-                       text="Bienvenido"
-                       style="-fx-font-size: 13px; -fx-text-fill: white; -fx-font-weight: bold;"/>
-                <Label fx:id="lblRol"
-                       text="Rol: --"
-                       style="-fx-font-size: 11px; -fx-text-fill: #aaaaaa;"/>
-            </VBox>
-
-            <Button text="Cerrar Sesion"
-                    onAction="#onCerrarSesion"
-                    style="-fx-font-size: 12px;"/>
+            <!-- Area de Perfil del Usuario -->
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <VBox alignment="CENTER_RIGHT">
+                    <Label fx:id="lblBienvenida" text="Usuario" style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+                    <Label fx:id="lblRol" text="Rol" style="-fx-font-size: 11px; -fx-text-fill: #666666;"/>
+                </VBox>
+                <Button onAction="#onCerrarSesion" styleClass="flat, danger">
+                    <graphic>
+                        <FontIcon iconLiteral="fltfmz-sign-out-24" iconSize="20" iconColor="#d13438"/>
+                    </graphic>
+                </Button>
+            </HBox>
         </HBox>
     </top>
 
     <!-- Menu lateral izquierdo -->
     <left>
-        <VBox spacing="8"
-              style="-fx-background-color: #ecf0f1; -fx-padding: 20 12 20 12; -fx-min-width: 200;">
+        <VBox fx:id="sideMenu" spacing="4" style="-fx-background-color: #F3F3F3; -fx-border-color: #E5E5E5; -fx-border-width: 0 1 0 0; -fx-pref-width: 220;">
+            <padding>
+                <Insets top="16" right="8" bottom="16" left="8"/>
+            </padding>
 
-            <Label text="Modulos"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #888888;"/>
+            <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" style="-fx-background-color: transparent;">
+                <VBox spacing="4" style="-fx-background-color: transparent;">
 
-            <!-- Botones Generales -->
-            <Button fx:id="btnEmpleados" text="👤  Empleados" onAction="#onEmpleados" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnNomina" text="💰  Nomina" onAction="#onNomina" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnAsistencia" text="📋  Asistencia" onAction="#onAsistencia" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnProduccion" text="🏭  Produccion" onAction="#onProduccion" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnProveedores" text="📦  Proveedores" onAction="#onProveedores" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
+                    <Label fx:id="lblModulos" text="MODULOS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #888888;">
+                        <padding><Insets left="8" bottom="4" top="8"/></padding>
+                    </Label>
+                    <Button fx:id="btnEmpleados" text="Empleados" onAction="#onEmpleados" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-person-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnNomina" text="Nómina" onAction="#onNomina" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-money-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnAsistencia" text="Asistencia" onAction="#onAsistencia" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-calendar-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnProduccion" text="Producción" onAction="#onProduccion" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-building-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnProveedores" text="Proveedores" onAction="#onProveedores" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-cube-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnProductos" text="Productos" onAction="#onProductos" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-grid-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnStock" text="Stock" onAction="#onStock" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-book-coins-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnAjusteStock" text="Ajuste Stock" onAction="#onAjusteStock" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-settings-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnCompras" text="Compras" onAction="#onCompras" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-reciept-24" iconSize="18"/></graphic>
+                    </Button>
 
-            <Separator style="-fx-padding: 5 0 5 0;"/>
+                    <Label fx:id="lblCRM" text="CRM Y VENTAS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #888888;">
+                        <padding><Insets left="8" bottom="4" top="8"/></padding>
+                    </Label>
+                    <Button fx:id="btnClientes" text="Clientes" onAction="#onClientes" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-people-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnClienteDescuento" text="Descuentos VIP" onAction="#onClienteDescuento" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-star-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnVentas" text="Punto de Venta" onAction="#onVentas" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-cart-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnHistorial" text="Historial" onAction="#onHistorial" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-history-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnCobros" text="Cobros" onAction="#onCobros" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-payment-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnDevoluciones" text="Devoluciones" onAction="#onDevoluciones" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfal-arrow-hook-down-left-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnPromociones" text="Promociones" onAction="#onPromociones" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-ticket-24" iconSize="18"/></graphic>
+                    </Button>
 
-            <Label text="CRM y Ventas" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #888888;"/>
-
-            <!-- Botones de CRM -->
-            <Button fx:id="btnClientes" text="🤝  Clientes" onAction="#onClientes" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnClienteDescuento" text="⭐  Descuentos VIP" onAction="#onClienteDescuento" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-
-            <!-- Botones de Ventas -->
-            <Button fx:id="btnVentas" text="🛒  Punto de Venta" onAction="#onVentas" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnHistorial" text="📖  Historial Ventas" onAction="#onHistorial" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnCobros" text="💳  Cobros" onAction="#onCobros" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnDevoluciones" text="↩️  Devoluciones" onAction="#onDevoluciones" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnPromociones" text="🏷️  Promociones" onAction="#onPromociones" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-
-            <Separator style="-fx-padding: 5 0 5 0;"/>
-
-            <Label text="Inventario y Compras" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #888888;"/>
-            <Button fx:id="btnProductos" text="📦  Productos" onAction="#onProductos" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnStock" text="📊  Consulta Stock" onAction="#onStock" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnAjusteStock" text="⚙️  Ajuste Stock" onAction="#onAjusteStock" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-            <Button fx:id="btnCompras" text="🧾  Compras" onAction="#onCompras" maxWidth="Infinity" style="-fx-font-size: 13px; -fx-alignment: CENTER_LEFT;"/>
-
+                </VBox>
+            </ScrollPane>
         </VBox>
     </left>
 
-    <!-- Area central -->
+    <!-- Area central dinámica -->
     <center>
-        <VBox alignment="CENTER" spacing="12"
-              style="-fx-background-color: #ffffff; -fx-padding: 40;">
-
-            <Label text="Selecciona un modulo del menu lateral"
-                   style="-fx-font-size: 15px; -fx-text-fill: #aaaaaa;"/>
-
-        </VBox>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #F8F8F8;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <VBox alignment="CENTER" spacing="12">
+                <FontIcon iconLiteral="fltfal-home-24" iconSize="48" iconColor="#CCCCCC"/>
+                <Label text="Selecciona un módulo del menú lateral para comenzar" style="-fx-font-size: 15px; -fx-text-fill: #888888;"/>
+            </VBox>
+        </StackPane>
     </center>
 
 </BorderPane>

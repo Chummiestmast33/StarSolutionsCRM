@@ -2,95 +2,135 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.VentaNuevaController"
-            prefHeight="720.0" prefWidth="1080.0"
-            stylesheets="@../../css/styles.css">
+            style="-fx-background-color: transparent;">
 
-    <!-- Encabezado y buscador -->
-    <top>
-        <VBox spacing="15" style="-fx-padding: 20 20 10 20; -fx-background-color: white;">
-            <Label text="Terminal de Venta"
-                   style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
 
-            <HBox spacing="20">
-                <!-- Seleccion de cliente -->
-                <VBox spacing="5">
-                    <Label text="Cliente" style="-fx-font-weight: bold;"/>
-                    <ComboBox fx:id="cmbCliente" prefWidth="300" promptText="Seleccionar cliente"/>
+    <!-- Center: Main POS Area (Cart / Ticket) -->
+    <center>
+        <VBox spacing="16" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 4);">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <BorderPane.margin>
+                <Insets right="16"/>
+            </BorderPane.margin>
+
+            <!-- Header and Client/Product Input -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <FontIcon iconLiteral="fltfal-cart-24" iconSize="32" iconColor="#005FB8"/>
+                <Label text="Punto de Venta" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-font-family: 'Segoe UI Variable Display', 'Segoe UI', sans-serif;"/>
+            </HBox>
+
+            <HBox spacing="16" alignment="BOTTOM_LEFT">
+                <!-- Cliente Input -->
+                <VBox spacing="4" HBox.hgrow="SOMETIMES">
+                    <Label text="Cliente" style="-fx-text-fill: #666666; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbCliente" maxWidth="Infinity" promptText="Seleccionar cliente registrado..."/>
                 </VBox>
 
-                <Separator orientation="VERTICAL"/>
-
-                <!-- Buscador de producto -->
-                <VBox spacing="5">
-                    <Label text="Agregar Producto" style="-fx-font-weight: bold;"/>
-                    <HBox spacing="8">
-                        <TextField fx:id="txtIdProducto" prefWidth="150" promptText="Codigo ID"/>
-                        <TextField fx:id="txtCantidad" prefWidth="80" promptText="Cant." text="1"/>
-                        <Button text="Agregar a ticket" onAction="#onAgregarProducto"
-                                style="-fx-background-color: #eeeeee; -fx-font-weight: bold;"/>
-                    </HBox>
+                <!-- Tipo de Pago -->
+                <VBox spacing="4">
+                    <Label text="Condición Pago" style="-fx-text-fill: #666666; -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbTipoPago" prefWidth="150" promptText="Cobro a..."/>
                 </VBox>
             </HBox>
-        </VBox>
-    </top>
 
-    <!-- Tabla de ticket de venta -->
-    <center>
-        <VBox style="-fx-padding: 10 20 20 20; -fx-background-color: white;">
-            <TableView fx:id="tablaDetalles" VBox.vgrow="ALWAYS">
+            <Separator/>
+
+            <!-- Product Search input bar -->
+            <HBox spacing="10" alignment="BOTTOM_LEFT">
+                <VBox spacing="4">
+                    <Label text="Código de Producto" style="-fx-text-fill: #666666;"/>
+                    <TextField fx:id="txtIdProducto" prefWidth="200" promptText="Ej. 1001"/>
+                </VBox>
+                <VBox spacing="4">
+                    <Label text="Cant." style="-fx-text-fill: #666666;"/>
+                    <TextField fx:id="txtCantidad" prefWidth="70" text="1" alignment="CENTER"/>
+                </VBox>
+                <Button text="Agregar al Ticket" onAction="#onAgregarProducto" prefHeight="32">
+                    <graphic>
+                        <FontIcon iconLiteral="fltfal-add-24"/>
+                    </graphic>
+                </Button>
+            </HBox>
+
+            <!-- Table of Items -->
+            <TableView fx:id="tablaDetalles" VBox.vgrow="ALWAYS" styleClass="striped">
                 <columns>
-                    <TableColumn fx:id="colProducto"   text="Producto"       prefWidth="300"/>
+                    <TableColumn fx:id="colProducto"   text="Cod. Producto"  prefWidth="120"/>
                     <TableColumn fx:id="colCantidad"   text="Cant."          prefWidth="80"/>
                     <TableColumn fx:id="colPrecio"     text="Precio Unit."   prefWidth="120"/>
-                    <TableColumn fx:id="colDescuento"  text="Desc. Aplicado" prefWidth="120"/>
-                    <TableColumn fx:id="colSubtotalLinea" text="Importe"     prefWidth="150"/>
+                    <TableColumn fx:id="colDescuento"  text="Desc. VIP"      prefWidth="120"/>
+                    <TableColumn fx:id="colSubtotalLinea" text="Importe Total" prefWidth="150"/>
                 </columns>
                 <placeholder>
-                    <Label text="El ticket esta vacio. Agrega productos arriba."/>
+                    <VBox alignment="CENTER" spacing="10">
+                        <FontIcon iconLiteral="fltfmz-reciept-24" iconSize="48" iconColor="#DDDDDD"/>
+                        <Label text="El ticket está vacío." style="-fx-text-fill: #888888;"/>
+                    </VBox>
                 </placeholder>
             </TableView>
+
         </VBox>
     </center>
 
-    <!-- Panel lateral de cobro -->
+    <!-- Right: Summary Panel -->
     <right>
-        <VBox prefWidth="320" spacing="15" alignment="BOTTOM_RIGHT"
-              style="-fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-width: 0 0 0 1; -fx-padding: 20;">
+        <VBox spacing="20" prefWidth="340" style="-fx-background-color: white; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 4);">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
 
-            <!-- Herramientas de tabla -->
-            <VBox alignment="TOP_RIGHT" VBox.vgrow="ALWAYS">
-                <Button text="Quitar linea" onAction="#onQuitarProducto"
-                        style="-fx-text-fill: #d32f2f; -fx-background-color: transparent; -fx-underline: true;"/>
+            <Label text="Resumen de Venta" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Separator/>
+
+            <!-- Removing an item -->
+            <VBox alignment="CENTER_RIGHT">
+                <Button text="Quitar línea seleccionada" onAction="#onQuitarProducto" styleClass="flat, danger">
+                    <graphic>
+                        <FontIcon iconLiteral="fltfal-delete-24" iconColor="#d13438"/>
+                    </graphic>
+                </Button>
             </VBox>
 
-            <!-- Desglose de totales -->
-            <VBox alignment="CENTER_RIGHT" spacing="8" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #e0e0e0; -fx-border-radius: 4;">
-                <HBox alignment="CENTER_RIGHT" spacing="20">
-                    <Label text="Subtotal:" style="-fx-text-fill: #666666;"/>
-                    <Label fx:id="lblSubtotal" text="0.00" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Totals -->
+            <VBox spacing="12" style="-fx-background-color: #F8F9FA; -fx-background-radius: 6; -fx-padding: 16;">
+                <HBox>
+                    <Label text="Subtotal:" style="-fx-font-size: 14px; -fx-text-fill: #666666;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblSubtotal" text="\$ 0.00" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
                 </HBox>
 
-                <HBox alignment="CENTER_RIGHT" spacing="20">
-                    <Label text="Descuentos:" style="-fx-text-fill: #d32f2f;"/>
-                    <Label fx:id="lblDescuentos" text="- 0.00" style="-fx-font-size: 16px; -fx-text-fill: #d32f2f; -fx-font-weight: bold;"/>
+                <HBox>
+                    <Label text="Descuentos Aplicados:" style="-fx-font-size: 14px; -fx-text-fill: #d13438;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblDescuentos" text="-\$ 0.00" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #d13438;"/>
                 </HBox>
 
                 <Separator/>
 
-                <Label text="TOTAL NETO" style="-fx-font-weight: bold; -fx-text-fill: #1565c0;"/>
-                <Label fx:id="lblTotal" style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: #1565c0;">
-                    <text>0.00</text>
-                </Label>
+                <VBox alignment="CENTER_RIGHT" spacing="4">
+                    <Label text="TOTAL A COBRAR" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #005FB8;"/>
+                    <Label fx:id="lblTotal" text="\$ 0.00" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #005FB8;"/>
+                </VBox>
             </VBox>
 
-            <!-- Boton de accion final -->
-            <Button text="Registrar y Cobrar" onAction="#onCobrar" prefHeight="55" maxWidth="Infinity"
-                    style="-fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Button text="Registrar y Cobrar" onAction="#onCobrar" styleClass="accent" prefHeight="50" maxWidth="Infinity" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+                <graphic>
+                    <FontIcon iconLiteral="fltfmz-payment-24" iconColor="white" iconSize="20"/>
+                </graphic>
+            </Button>
         </VBox>
     </right>
 

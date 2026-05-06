@@ -76,6 +76,7 @@ public class LoginController {
             stage.setTitle("Star Solutions CRM");
         } catch (IOException e) {
             mostrarError("No se pudo abrir la pantalla principal.");
+            e.printStackTrace();
         }
     }
 
