@@ -10,7 +10,7 @@ import java.util.Properties;
 public class DatabaseConnection {
     private static DatabaseConnection instance;
     private Connection connection;
-    private static final String CONFIG_PATH = "/com/starsolutions/starsolutionscrm/database.local.properties";
+    private static final String CONFIG_PATH = "/com/starsolutions/starsolutionscrm/database.properties";
     private static final String DEFAULT_TEST_URL = "jdbc:h2:mem:starsolutionscrm;MODE=MySQL;DB_CLOSE_DELAY=-1";
 
     private DatabaseConnection() throws SQLException {

@@ -1,9 +1,12 @@
 package com.starsolutions.starsolutionscrm.dao.interfaces;
 
-import java.math.BigDecimal;
+import com.starsolutions.starsolutionscrm.model.ventas.Promocion;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface IPromocionDAO {
-    // Retorna porcentaje de descuento
-    BigDecimal buscarDescuentoAplicable(int idCliente, int idProducto) throws SQLException;
+    List<Promocion> listarActivas() throws SQLException;
+    boolean crear(Promocion promocion) throws SQLException;
+    boolean desactivar(int idPromocion) throws SQLException;
 }
+

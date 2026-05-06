@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.VentaCobroController"
-            prefHeight="400.0" prefWidth="600.0">
+<!-- Ventana para cobrar saldos pendientes -->
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.VentaCobroController"
+      style="-fx-padding: 20;">
 
-</AnchorPane>
+    <Label text="Registrar Cobro / Abono" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="ID Venta:" prefWidth="100"/>
+        <TextField fx:id="txtIdVenta" promptText="Ej. 1" HBox.hgrow="ALWAYS"/>
+        <Button text="Buscar Saldo" onAction="#onBuscarVenta"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Saldo Pendiente:" prefWidth="100"/>
+        <Label fx:id="lblSaldoPendiente" style="-fx-font-weight: bold; -fx-text-fill: #cc0000;">
+            <text>$ 0.00</text>
+        </Label>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="ID Cliente:" prefWidth="100"/>
+        <TextField fx:id="txtIdCliente" promptText="ID del cliente" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Monto a Abonar:" prefWidth="100"/>
+        <TextField fx:id="txtMonto" promptText="0.00" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <Button text="Registrar Pago" onAction="#onRegistrarCobro" defaultButton="true"
+            style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="200"/>
+
+</VBox>

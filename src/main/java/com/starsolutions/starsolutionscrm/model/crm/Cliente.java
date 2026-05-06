@@ -31,5 +31,20 @@ public class Cliente {
     public void setActivo(boolean activo) { this.activo = activo; }
 
     @Override
-    public String toString() { return nombre; }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return idCliente == cliente.idCliente; // Comparamos por ID
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(idCliente);
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre='" + nombre + '\'' + '}';
+    }
 }

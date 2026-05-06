@@ -17,20 +17,24 @@ public class MainController {
     @FXML private Label lblBienvenida;
     @FXML private Label lblRol;
 
-    // Botones de RRHH y Produccion
+    // Botones Generales
     @FXML private Button btnEmpleados;
     @FXML private Button btnNomina;
     @FXML private Button btnAsistencia;
     @FXML private Button btnProduccion;
-
-    // Botones de CRM y Ventas (Nuevos)
-    @FXML private Button btnClientes;
     @FXML private Button btnProveedores;
+
+    // Botones de CRM y Ventas
+    @FXML private Button btnClientes;
+    @FXML private Button btnClienteDescuento;
     @FXML private Button btnVentas;
+    @FXML private Button btnHistorial;
+    @FXML private Button btnCobros;
+    @FXML private Button btnDevoluciones;
+    @FXML private Button btnPromociones;
 
     private static final String BASE_FXML = "/com/starsolutions/starsolutionscrm/fxml/";
 
-    // Inicializar
     @FXML
     public void initialize() {
         SessionManager session = SessionManager.getInstance();
@@ -40,24 +44,31 @@ public class MainController {
         lblBienvenida.setText("Bienvenido, " + nombre);
         lblRol.setText("Rol: " + tipo);
 
-        // Control de acceso por rol
+        // Control de acceso al menú lateral
         configurarAccesoPorRol(tipo);
     }
 
-    // Configurar visibilidad segun el tipo de empleado
+    // Metodo para ocultar/mostrar botones segun el area de trabajo
     private void configurarAccesoPorRol(String tipo) {
-        // Por defecto ocultar todo
+        // 1. Ocultar todos los botones primero
         btnEmpleados.setVisible(false);
         btnNomina.setVisible(false);
         btnAsistencia.setVisible(false);
         btnProduccion.setVisible(false);
-        btnClientes.setVisible(false);
         btnProveedores.setVisible(false);
-        btnVentas.setVisible(false);
 
-        // Asistencia la ven todos por defecto
+        btnClientes.setVisible(false);
+        btnClienteDescuento.setVisible(false);
+        btnVentas.setVisible(false);
+        btnHistorial.setVisible(false);
+        btnCobros.setVisible(false);
+        btnDevoluciones.setVisible(false);
+        btnPromociones.setVisible(false);
+
+        // 2. Todos los empleados pueden registrar asistencia
         btnAsistencia.setVisible(true);
 
+        // 3. Habilitar solo lo correspondiente al rol
         switch (tipo) {
             case "RH" -> {
                 btnEmpleados.setVisible(true);
@@ -66,85 +77,89 @@ public class MainController {
             case "Produccion" -> {
                 btnProduccion.setVisible(true);
             }
-            case "Ventas" -> {
-                btnClientes.setVisible(true);
-                btnVentas.setVisible(true);
-            }
             case "Inventario" -> {
                 btnProveedores.setVisible(true);
-                // Aqui luego tu companero 2 agregara sus botones de stock y compras
+            }
+            case "Ventas" -> {
+                btnClientes.setVisible(true);
+                btnClienteDescuento.setVisible(true);
+                btnVentas.setVisible(true);
+                btnHistorial.setVisible(true);
+                btnCobros.setVisible(true);
+                btnDevoluciones.setVisible(true);
+                btnPromociones.setVisible(true);
             }
         }
     }
 
-    // Navegacion RRHH
-    @FXML
-    public void onEmpleados() {
-        abrirVentana("rrhh/empleado-lista.fxml", "Empleados");
-    }
+    // ==========================================================
+    // METODOS DE NAVEGACION
+    // ==========================================================
 
     @FXML
-    public void onNomina() {
-        abrirVentana("rrhh/nomina-lista.fxml", "Nomina");
-    }
+    public void onEmpleados() { abrirVentana("rrhh/empleado-lista.fxml", "Empleados"); }
 
     @FXML
-    public void onAsistencia() {
-        abrirVentana("rrhh/empleado-desempeno.fxml", "Asistencia");
-    }
-
-    // Navegacion Produccion
-    @FXML
-    public void onProduccion() {
-        abrirVentana("prd/orden-produccion-lista.fxml", "Produccion");
-    }
-
-    // Navegacion CRM
-    @FXML
-    public void onClientes() {
-        abrirVentana("crm/cliente-lista.fxml", "Directorio de Clientes");
-    }
+    public void onNomina() { abrirVentana("rrhh/nomina-lista.fxml", "Nomina"); }
 
     @FXML
-    public void onProveedores() {
-        abrirVentana("crm/proveedor-lista.fxml", "Catalogo de Proveedores");
-    }
+    public void onAsistencia() { abrirVentana("rrhh/empleado-desempeno.fxml", "Asistencia"); }
 
-    // Navegacion Ventas
     @FXML
-    public void onVentas() {
-        abrirVentana("ven/venta-nueva.fxml", "Terminal de Ventas");
-    }
+    public void onProduccion() { abrirVentana("prd/orden-produccion-lista.fxml", "Produccion"); }
 
-    // Cerrar sesion
+    @FXML
+    public void onProveedores() { abrirVentana("crm/proveedor-lista.fxml", "Proveedores"); }
+
+    @FXML
+    public void onClientes() { abrirVentana("crm/cliente-lista.fxml", "Clientes"); }
+
+    @FXML
+    public void onClienteDescuento() { abrirVentana("crm/cliente-descuento.fxml", "Descuentos VIP"); }
+
+    @FXML
+    public void onVentas() { abrirVentana("ven/venta-nueva.fxml", "Terminal de Ventas"); }
+
+    @FXML
+    public void onHistorial() { abrirVentana("ven/venta-historial.fxml", "Historial de Ventas"); }
+
+    @FXML
+    public void onCobros() { abrirVentana("ven/venta-cobro.fxml", "Registrar Cobros"); }
+
+    @FXML
+    public void onDevoluciones() { abrirVentana("ven/devolucion-form.fxml", "Devoluciones"); }
+
+    @FXML
+    public void onPromociones() { abrirVentana("ven/promocion-lista.fxml", "Promociones y Ofertas"); }
+
+    // ==========================================================
+    // SESION Y APERTURA DE VENTANAS
+    // ==========================================================
+
     @FXML
     public void onCerrarSesion() {
         SessionManager.getInstance().cerrarSesion();
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(BASE_FXML + "base/login.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(BASE_FXML + "base/login.fxml"));
             Stage stage = (Stage) lblBienvenida.getScene().getWindow();
             stage.setScene(new Scene(loader.load(), 600, 400));
             stage.setTitle("Star Solutions CRM - Login");
             stage.setResizable(false);
         } catch (IOException e) {
-            AlertUtil.error("Error", "No se pudo cerrar la sesion correctamente");
+            AlertUtil.error("Error", "No se pudo cerrar la sesion.");
         }
     }
 
-    // Metodo para abrir ventanas hijas
+    // Metodo centralizado para abrir cualquier pantalla
     private void abrirVentana(String rutaFxml, String titulo) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(BASE_FXML + rutaFxml)
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(BASE_FXML + rutaFxml));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
             stage.setTitle(titulo);
             stage.show();
-        } catch (IOException e) {
-            AlertUtil.error("Error de Navegacion", "No se encontro el archivo: " + rutaFxml);
+        } catch (Exception e) {
+            AlertUtil.error("Error de Interfaz", "Archivo no encontrado: " + rutaFxml);
             e.printStackTrace();
         }
     }

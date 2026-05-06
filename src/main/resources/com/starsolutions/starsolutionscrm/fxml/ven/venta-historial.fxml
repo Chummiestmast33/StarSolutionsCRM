@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.VentaHistorialController"
-            prefHeight="400.0" prefWidth="600.0">
+<!-- Vista del historial general de ventas -->
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.VentaHistorialController">
 
-</AnchorPane>
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Historial de Ventas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Actualizar" onAction="#cargarHistorial"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="tablaHistorial">
+            <columns>
+                <TableColumn fx:id="colIdVenta" text="ID Venta" prefWidth="80"/>
+                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="120"/>
+                <TableColumn fx:id="colEstatus" text="Estatus" prefWidth="120"/>
+                <TableColumn fx:id="colCondicion" text="Tipo de Pago" prefWidth="120"/>
+                <TableColumn fx:id="colTotal" text="Total ($)" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

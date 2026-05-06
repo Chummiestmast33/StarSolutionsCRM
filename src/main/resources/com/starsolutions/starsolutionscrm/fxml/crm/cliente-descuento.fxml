@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.compras.ClienteDescuentoController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.starsolutions.starsolutionscrm.controller.compras.ClienteDescuentoController"
+      style="-fx-padding: 20;">
 
-</AnchorPane>
+    <Label text="Gestion de Descuentos VIP" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <ComboBox fx:id="cmbCliente" promptText="Selecciona un cliente" prefWidth="250"/>
+    <TextField fx:id="txtDescuento" promptText="Porcentaje (Ej. 10.00)" prefWidth="250"/>
+    <TextField fx:id="txtDescripcion" promptText="Descripcion (Ej. Cliente Mayorista)" prefWidth="250"/>
+
+    <Button text="Guardar Descuento" onAction="#onGuardar" defaultButton="true"
+            style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+</VBox>

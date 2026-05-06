@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.DevolucionFormController"
-            prefHeight="400.0" prefWidth="600.0">
+<!-- Ventana para procesar devoluciones de mercancia -->
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.DevolucionFormController"
+      style="-fx-padding: 20;">
 
-</AnchorPane>
+    <Label text="Nueva Devolución" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtIdVenta" promptText="ID de la Venta original" />
+
+    <TextField fx:id="txtIdProducto" promptText="ID del Producto a regresar" />
+
+    <TextField fx:id="txtCantidad" promptText="Cantidad de piezas" />
+
+    <TextField fx:id="txtMontoDevuelto" promptText="Monto a regresar al cliente ($)" />
+
+    <TextField fx:id="txtMotivo" promptText="Motivo (Ej. Defecto de fabrica)" />
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Procesar" onAction="#onProcesarDevolucion" defaultButton="true"
+                style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+        <Button text="Cancelar" onAction="#onCancelar" />
+    </HBox>
+
+</VBox>

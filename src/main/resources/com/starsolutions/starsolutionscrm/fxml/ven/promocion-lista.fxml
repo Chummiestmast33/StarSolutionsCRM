@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.PromocionListaController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.PromocionListaController">
 
-</AnchorPane>
+    <left>
+        <VBox spacing="10" style="-fx-padding: 15; -fx-background-color: #f4f4f4;" prefWidth="250">
+            <Label text="Nueva Promocion" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+            <TextField fx:id="txtIdProducto" promptText="ID del Producto"/>
+            <TextField fx:id="txtNombre" promptText="Nombre de Promocion"/>
+            <TextField fx:id="txtDescuento" promptText="Descuento (%)"/>
+            <DatePicker fx:id="dpInicio" promptText="Fecha de Inicio" maxWidth="Infinity"/>
+            <DatePicker fx:id="dpFin" promptText="Fecha de Fin" maxWidth="Infinity"/>
+
+            <Button text="Registrar" onAction="#onGuardar" maxWidth="Infinity"
+                    style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="Desactivar Seleccionada" onAction="#onDesactivar"
+                        style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
+            </HBox>
+
+            <TableView fx:id="tablaPromociones" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colIdProducto" text="ID Prod" prefWidth="70"/>
+                    <TableColumn fx:id="colNombre" text="Promocion" prefWidth="150"/>
+                    <TableColumn fx:id="colDescuento" text="Desc (%)" prefWidth="80"/>
+                    <TableColumn fx:id="colInicio" text="Inicio" prefWidth="100"/>
+                    <TableColumn fx:id="colFin" text="Fin" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
