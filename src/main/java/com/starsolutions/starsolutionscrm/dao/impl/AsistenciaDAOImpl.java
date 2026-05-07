@@ -6,6 +6,7 @@ import com.starsolutions.starsolutionscrm.model.rrhh.Asistencia;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,27 +22,27 @@ public class AsistenciaDAOImpl implements IAsistenciaDAO {
     @Override
     public boolean registrarEntrada(int idEmpleado, LocalDate fecha) throws SQLException {
         String sql = "INSERT INTO rh_asistencia (id_empleado, fecha, hora_entrada) " +
-                "VALUES (?, ?, NOW())";
+                "VALUES (?, ?, ?)";
 
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
             ps.setInt(1, idEmpleado);
             ps.setDate(2, Date.valueOf(fecha));
+            ps.setTime(3, Time.valueOf(LocalTime.now()));
             return ps.executeUpdate() > 0;
         }
     }
 
-    // ----------------------------------------------------------------
     // REGISTRAR SALIDA
-    // ----------------------------------------------------------------
     @Override
     public boolean registrarSalida(int idEmpleado, LocalDate fecha) throws SQLException {
         String sql = "UPDATE rh_asistencia " +
-                "SET hora_salida = NOW() " +
+                "SET hora_salida = ? " +   // ← ya no NOW()
                 "WHERE id_empleado = ? AND fecha = ?";
 
         try (PreparedStatement ps = getConn().prepareStatement(sql)) {
-            ps.setInt(1, idEmpleado);
-            ps.setDate(2, Date.valueOf(fecha));
+            ps.setTime(1, Time.valueOf(LocalTime.now()));
+            ps.setInt(2, idEmpleado);
+            ps.setDate(3, Date.valueOf(fecha));
             return ps.executeUpdate() > 0;
         }
     }
