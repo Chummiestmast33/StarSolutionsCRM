@@ -153,6 +153,62 @@ public class VentaDAOImpl implements IVentaDAO {
         return lista;
     }
 
+
+    public List<Venta> listarVentasCreditoPendientes() throws SQLException {
+        String sql = "SELECT v.id_venta, v.id_cliente, v.total, c.nombre as cliente_nombre, " +
+                     "(v.total - COALESCE((SELECT SUM(monto) FROM ven_cobro WHERE id_venta = v.id_venta), 0)) as saldo " +
+                     "FROM ven_venta v " +
+                     "JOIN crm_cliente c ON v.id_cliente = c.id_cliente " +
+                     "WHERE v.condicion_pago = 'Credito' AND v.estatus != 'Liquidada'";
+                     
+        List<Venta> lista = new ArrayList<>();
+        
+        try (PreparedStatement ps = getConn().prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+             
+            while (rs.next()) {
+                Venta v = new Venta();
+                v.setIdVenta(rs.getInt("id_venta"));
+                v.setIdCliente(rs.getInt("id_cliente"));
+                v.setTotal(rs.getBigDecimal("total"));
+                v.setClienteNombre(rs.getString("cliente_nombre"));
+                v.setSaldoPendiente(rs.getBigDecimal("saldo"));
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+
+    public List<Venta> listarVentasActivasOLiquidadas() throws SQLException {
+        String sql = "SELECT v.id_venta, v.id_cliente, v.total, c.nombre as cliente_nombre, v.fecha, " +
+                     "(v.total - COALESCE((SELECT SUM(monto) FROM ven_cobro WHERE id_venta = v.id_venta), 0)) as saldo " +
+                     "FROM ven_venta v " +
+                     "JOIN crm_cliente c ON v.id_cliente = c.id_cliente " +
+                     "WHERE v.estatus IN ('Activa', 'Liquidada') " +
+                     "ORDER BY v.fecha DESC";
+                     
+        List<Venta> lista = new ArrayList<>();
+        
+        try (PreparedStatement ps = getConn().prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+             
+            while (rs.next()) {
+                Venta v = new Venta();
+                v.setIdVenta(rs.getInt("id_venta"));
+                v.setIdCliente(rs.getInt("id_cliente"));
+                v.setTotal(rs.getBigDecimal("total"));
+                v.setClienteNombre(rs.getString("cliente_nombre"));
+                v.setSaldoPendiente(rs.getBigDecimal("saldo"));
+                Date fechaSql = rs.getDate("fecha");
+                if (fechaSql != null) {
+                    v.setFecha(fechaSql.toLocalDate());
+                }
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+
     @Override
     public List<Venta> listarVentasPorFiltros(Integer idCliente, LocalDate fechaInicio,
             LocalDate fechaFin, String estatus) throws SQLException {
@@ -203,3 +259,4 @@ public class VentaDAOImpl implements IVentaDAO {
         return lista;
     }
 }
+

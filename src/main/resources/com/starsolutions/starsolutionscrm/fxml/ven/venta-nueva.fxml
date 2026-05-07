@@ -34,7 +34,7 @@
                 <!-- Cliente Input -->
                 <VBox spacing="4" HBox.hgrow="SOMETIMES">
                     <Label text="Cliente" style="-fx-text-fill: #666666; -fx-font-weight: bold;"/>
-                    <ComboBox fx:id="cmbCliente" maxWidth="Infinity" promptText="Seleccionar cliente registrado..."/>
+                    <ComboBox fx:id="cmbCliente" maxWidth="Infinity" promptText="Buscar cliente por ID, nombre o RFC..." editable="true"/>
                 </VBox>
 
                 <!-- Tipo de Pago -->
@@ -95,7 +95,7 @@
 
             <!-- Removing an item -->
             <VBox alignment="CENTER_RIGHT">
-                <Button text="Quitar línea seleccionada" onAction="#onQuitarProducto" styleClass="flat, danger">
+                <Button text="Eliminar producto seleccionado" onAction="#onQuitarProducto" styleClass="flat, danger">
                     <graphic>
                         <FontIcon iconLiteral="fltfal-delete-24" iconColor="#d13438"/>
                     </graphic>

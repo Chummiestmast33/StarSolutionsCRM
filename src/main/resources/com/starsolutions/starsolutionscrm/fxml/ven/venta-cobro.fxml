@@ -12,7 +12,7 @@
 
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="ID Venta:" prefWidth="100"/>
-        <TextField fx:id="txtIdVenta" promptText="Ej. 1" HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="cmbVenta" promptText="Buscar Venta (Crédito)" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
         <Button text="Buscar Saldo" onAction="#onBuscarVenta"/>
     </HBox>
 
@@ -23,10 +23,7 @@
         </Label>
     </HBox>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="ID Cliente:" prefWidth="100"/>
-        <TextField fx:id="txtIdCliente" promptText="ID del cliente" HBox.hgrow="ALWAYS"/>
-    </HBox>
+    
 
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Monto a Abonar:" prefWidth="100"/>

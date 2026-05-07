@@ -8,6 +8,7 @@ import com.starsolutions.starsolutionscrm.model.compras.OrdenCompra;
 import com.starsolutions.starsolutionscrm.model.crm.Proveedor;
 import com.starsolutions.starsolutionscrm.model.inventario.Producto;
 import com.starsolutions.starsolutionscrm.util.AlertUtil;
+import com.starsolutions.starsolutionscrm.util.SearchableComboBoxUtil;
 import com.starsolutions.starsolutionscrm.util.SessionManager;
 
 import javafx.collections.FXCollections;
@@ -151,7 +152,12 @@ public class OrdenCompraNuevaController {
 
 	private void cargarProveedores() {
 		try {
-			cmbProveedor.setItems(FXCollections.observableArrayList(proveedorDAO.listarActivos()));
+			List<Proveedor> proveedores = proveedorDAO.listarActivos();
+			SearchableComboBoxUtil.setupSearchableComboBox(
+				cmbProveedor,
+				proveedores,
+				p -> p.getIdProveedor() + " - " + p.getNombre() + " - " + p.getRfc()
+			);
 		} catch (Exception e) {
 			AlertUtil.error("Error", "No se pudieron cargar proveedores: " + e.getMessage());
 		}

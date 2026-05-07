@@ -9,6 +9,7 @@ import com.starsolutions.starsolutionscrm.model.inventario.Stock;
 import com.starsolutions.starsolutionscrm.model.ventas.Venta;
 import com.starsolutions.starsolutionscrm.model.ventas.VentaDetalle;
 import com.starsolutions.starsolutionscrm.util.AlertUtil;
+import com.starsolutions.starsolutionscrm.util.SearchableComboBoxUtil;
 import com.starsolutions.starsolutionscrm.util.SessionManager;
 
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.util.StringConverter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VentaNuevaController {
 
@@ -74,14 +76,12 @@ public class VentaNuevaController {
 
     private void cargarClientes() {
         try {
-            ObservableList<Cliente> clientes = FXCollections.observableArrayList(clienteDAO.listarActivos());
-            cmbCliente.setItems(clientes);
-            cmbCliente.setConverter(new StringConverter<Cliente>() {
-                @Override
-                public String toString(Cliente c) { return c == null ? "" : c.getNombre(); }
-                @Override
-                public Cliente fromString(String string) { return null; }
-            });
+            List<Cliente> clientes = clienteDAO.listarActivos();
+            SearchableComboBoxUtil.setupSearchableComboBox(
+                cmbCliente,
+                clientes,
+                c -> c.getIdCliente() + " - " + c.getNombre() + " - " + c.getRfc()
+            );
         } catch (Exception e) {
             AlertUtil.error("Error BD", "Error al cargar el catalogo de clientes.");
         }

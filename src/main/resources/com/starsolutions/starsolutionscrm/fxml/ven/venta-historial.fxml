@@ -12,7 +12,7 @@
         <padding><Insets top="10" right="10" bottom="6" left="10"/></padding>
         <Label text="Historial de Ventas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <TextField fx:id="txtIdCliente" promptText="ID Cliente" prefWidth="120"/>
+            <ComboBox fx:id="cmbCliente" promptText="Seleccionar cliente (o buscar...)" prefWidth="200" editable="true"/>
             <DatePicker fx:id="dpFechaInicio" promptText="Desde"/>
             <DatePicker fx:id="dpFechaFin" promptText="Hasta"/>
             <ComboBox fx:id="cbEstatus" promptText="Estatus" prefWidth="130"/>

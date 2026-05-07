@@ -14,6 +14,10 @@ public class Venta {
     private String condicionPago;
     private LocalDate fecha;
 
+    // Campos agregados para visualización en UI
+    private String clienteNombre;
+    private BigDecimal saldoPendiente;
+
     public Venta() {}
 
     // Getters y Setters
@@ -43,6 +47,12 @@ public class Venta {
 
     public LocalDate getFecha() { return fecha; }
     public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+
+    public String getClienteNombre() { return clienteNombre; }
+    public void setClienteNombre(String clienteNombre) { this.clienteNombre = clienteNombre; }
+
+    public BigDecimal getSaldoPendiente() { return saldoPendiente; }
+    public void setSaldoPendiente(BigDecimal saldoPendiente) { this.saldoPendiente = saldoPendiente; }
 
     @Override
     public boolean equals(Object o) {

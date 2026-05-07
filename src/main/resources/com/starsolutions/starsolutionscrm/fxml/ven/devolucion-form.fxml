@@ -7,15 +7,15 @@
       fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.DevolucionFormController"
       style="-fx-padding: 20;">
 
-    <Label text="Nueva DevoluciÃ³n" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <Label text="Nueva Devolución" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-    <TextField fx:id="txtIdVenta" promptText="ID de la Venta original" />
+    <ComboBox fx:id="cmbVenta" promptText="Seleccionar venta (Activa o Liquidada)" prefWidth="300" />
 
     <TextField fx:id="txtIdProducto" promptText="ID del Producto a regresar" />
 
     <TextField fx:id="txtCantidad" promptText="Cantidad de piezas" />
 
-    <TextField fx:id="txtMontoDevuelto" promptText="Monto a regresar al cliente ($)" />
+    <TextField fx:id="txtMontoDevuelto" promptText="Monto a regresar al cliente (\$)" />
 
     <TextField fx:id="txtMotivo" promptText="Motivo (Ej. Defecto de fabrica)" />
 

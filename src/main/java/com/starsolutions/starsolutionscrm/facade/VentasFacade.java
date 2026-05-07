@@ -23,6 +23,15 @@ public class VentasFacade {
     private final InventarioFacade inventario = new InventarioFacade();
 
     // Metodo para buscar productos desde el punto de venta
+
+    public List<Venta> listarVentasCreditoActivasPendientes() throws Exception {
+        return ventaDAO.listarVentasCreditoPendientes();
+    }
+
+    public List<Venta> listarVentasParaDevolucion() throws Exception {
+        return ventaDAO.listarVentasActivasOLiquidadas();
+    }
+
     public Producto buscarProducto(int idProducto) throws Exception {
         return inventario.obtenerProductoPorId(idProducto);
     }
@@ -135,3 +144,5 @@ public class VentasFacade {
         }
     }
 }
+
+
