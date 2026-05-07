@@ -8,15 +8,20 @@
             fx:controller="com.starsolutions.starsolutionscrm.controller.ventas.VentaHistorialController">
 
     <top>
+    <VBox spacing="8">
+        <padding><Insets top="10" right="10" bottom="6" left="10"/></padding>
+        <Label text="Historial de Ventas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <Label text="Historial de Ventas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <Region HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtIdCliente" promptText="ID Cliente" prefWidth="120"/>
+            <DatePicker fx:id="dpFechaInicio" promptText="Desde"/>
+            <DatePicker fx:id="dpFechaFin" promptText="Hasta"/>
+            <ComboBox fx:id="cbEstatus" promptText="Estatus" prefWidth="130"/>
+            <Button text="Filtrar"    onAction="#onFiltrar"/>
+            <Button text="Limpiar"   onAction="#onLimpiarFiltros"/>
             <Button text="Actualizar" onAction="#cargarHistorial"/>
         </HBox>
-    </top>
+    </VBox>
+</top>
 
     <center>
         <TableView fx:id="tablaHistorial">

@@ -23,4 +23,6 @@ public interface IEmpleadoDAO {
 
     // Baja lógica — solo pone activo = 0
     boolean desactivar(int num) throws SQLException;
+
+    boolean actualizarIndicadores(int num, double productividad, double eficiencia) throws SQLException;
 }

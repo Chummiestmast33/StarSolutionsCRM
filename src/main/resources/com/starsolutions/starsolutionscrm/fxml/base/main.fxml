@@ -63,6 +63,9 @@
                     <Button fx:id="btnAsistencia" text="Asistencia" onAction="#onAsistencia" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
                         <graphic><FontIcon iconLiteral="fltfal-calendar-24" iconSize="18"/></graphic>
                     </Button>
+                    <Button fx:id="btnIndicadores" text="Indicadores" onAction="#onIndicadores" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-ribbon-star-24" iconSize="18"/></graphic>
+                    </Button>
                     <Button fx:id="btnProduccion" text="Producción" onAction="#onProduccion" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
                         <graphic><FontIcon iconLiteral="fltfal-building-24" iconSize="18"/></graphic>
                     </Button>
@@ -71,6 +74,9 @@
                     </Button>
                     <Button fx:id="btnProductos" text="Productos" onAction="#onProductos" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
                         <graphic><FontIcon iconLiteral="fltfal-grid-24" iconSize="18"/></graphic>
+                    </Button>
+                    <Button fx:id="btnCategorias" text="Categorías" onAction="#onCategorias" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
+                        <graphic><FontIcon iconLiteral="fltfmz-tag-24" iconSize="18"/></graphic>
                     </Button>
                     <Button fx:id="btnStock" text="Stock" onAction="#onStock" styleClass="flat" maxWidth="Infinity" alignment="BASELINE_LEFT">
                         <graphic><FontIcon iconLiteral="fltfal-book-coins-24" iconSize="18"/></graphic>

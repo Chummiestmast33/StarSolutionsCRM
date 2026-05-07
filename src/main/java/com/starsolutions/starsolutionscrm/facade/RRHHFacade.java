@@ -16,8 +16,8 @@ import java.util.List;
 
 public class RRHHFacade {
 
-    private final IEmpleadoDAO  empleadoDAO  = new EmpleadoDAOImpl();
-    private final INominaDAO    nominaDAO    = new NominaDAOImpl();
+    private final IEmpleadoDAO empleadoDAO = new EmpleadoDAOImpl();
+    private final INominaDAO nominaDAO = new NominaDAOImpl();
     private final IAsistenciaDAO asistenciaDAO = new AsistenciaDAOImpl();
 
     // ----------------------------------------------------------------
@@ -80,5 +80,13 @@ public class RRHHFacade {
 
     public Asistencia obtenerAsistenciaHoy(int idEmpleado) throws SQLException {
         return asistenciaDAO.obtenerPorEmpleadoYFecha(idEmpleado, LocalDate.now());
+    }
+
+    public List<Empleado> listarEmpleadosActivos() throws SQLException {
+        return empleadoDAO.obtenerTodos();
+    }
+
+    public boolean actualizarIndicadores(int num, double productividad, double eficiencia) throws SQLException {
+        return empleadoDAO.actualizarIndicadores(num, productividad, eficiencia);
     }
 }

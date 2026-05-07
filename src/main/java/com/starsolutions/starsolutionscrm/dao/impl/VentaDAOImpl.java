@@ -122,13 +122,14 @@ public class VentaDAOImpl implements IVentaDAO {
     // ==========================================
     @Override
     public List<Venta> listarVentas() throws SQLException {
-        String sql = "SELECT id_venta, id_cliente, id_empleado, subtotal, descuento_aplicado, total, estatus, condicion_pago, fecha " +
+        String sql = "SELECT id_venta, id_cliente, id_empleado, subtotal, descuento_aplicado, total, estatus, condicion_pago, fecha "
+                +
                 "FROM ven_venta ORDER BY fecha DESC, id_venta DESC";
 
         List<Venta> lista = new ArrayList<>();
 
         try (PreparedStatement ps = getConn().prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Venta v = new Venta();
@@ -147,6 +148,56 @@ public class VentaDAOImpl implements IVentaDAO {
                 }
 
                 lista.add(v);
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public List<Venta> listarVentasPorFiltros(Integer idCliente, LocalDate fechaInicio,
+            LocalDate fechaFin, String estatus) throws SQLException {
+        StringBuilder sql = new StringBuilder(
+                "SELECT id_venta, id_cliente, id_empleado, subtotal, descuento_aplicado, " +
+                        "total, estatus, condicion_pago, fecha FROM ven_venta WHERE 1=1 ");
+
+        if (idCliente != null)
+            sql.append("AND id_cliente = ? ");
+        if (fechaInicio != null)
+            sql.append("AND fecha >= ? ");
+        if (fechaFin != null)
+            sql.append("AND fecha <= ? ");
+        if (estatus != null && !estatus.isEmpty())
+            sql.append("AND estatus = ? ");
+        sql.append("ORDER BY fecha DESC, id_venta DESC");
+
+        List<Venta> lista = new ArrayList<>();
+        try (PreparedStatement ps = getConn().prepareStatement(sql.toString())) {
+            int i = 1;
+            if (idCliente != null)
+                ps.setInt(i++, idCliente);
+            if (fechaInicio != null)
+                ps.setDate(i++, Date.valueOf(fechaInicio));
+            if (fechaFin != null)
+                ps.setDate(i++, Date.valueOf(fechaFin));
+            if (estatus != null && !estatus.isEmpty())
+                ps.setString(i++, estatus);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Venta v = new Venta();
+                    v.setIdVenta(rs.getInt("id_venta"));
+                    v.setIdCliente(rs.getInt("id_cliente"));
+                    v.setIdEmpleado(rs.getInt("id_empleado"));
+                    v.setSubtotal(rs.getBigDecimal("subtotal"));
+                    v.setDescuentoAplicado(rs.getBigDecimal("descuento_aplicado"));
+                    v.setTotal(rs.getBigDecimal("total"));
+                    v.setEstatus(rs.getString("estatus"));
+                    v.setCondicionPago(rs.getString("condicion_pago"));
+                    Date f = rs.getDate("fecha");
+                    if (f != null)
+                        v.setFecha(f.toLocalDate());
+                    lista.add(v);
+                }
             }
         }
         return lista;

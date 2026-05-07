@@ -1,9 +1,11 @@
 package com.starsolutions.starsolutionscrm.facade;
 
+import com.starsolutions.starsolutionscrm.dao.impl.CategoriaDAOImpl;
 import com.starsolutions.starsolutionscrm.dao.impl.MateriaPrimaDAOImpl;
 import com.starsolutions.starsolutionscrm.dao.impl.ProductoDAOImpl;
 import com.starsolutions.starsolutionscrm.dao.impl.StockDAOImpl;
 import com.starsolutions.starsolutionscrm.dao.interfaces.ResultadoEliminacion;
+import com.starsolutions.starsolutionscrm.model.inventario.CategoriaProducto;
 import com.starsolutions.starsolutionscrm.model.inventario.MateriaPrima;
 import com.starsolutions.starsolutionscrm.model.inventario.MovimientoInventario;
 import com.starsolutions.starsolutionscrm.model.inventario.Producto;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 public class InventarioFacade {
 
+	private final CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl();
 	private final ProductoDAOImpl productoDAO = new ProductoDAOImpl();
 	private final StockDAOImpl stockDAO = new StockDAOImpl();
 	private final MateriaPrimaDAOImpl materiaDAO = new MateriaPrimaDAOImpl();
@@ -68,7 +71,8 @@ public class InventarioFacade {
 	}
 
 	// ---------------------- Stock -----------------------------------
-	public boolean verificarDisponibilidadPorUbicacion(int idProducto, String ubicacion, int cantidad) throws SQLException {
+	public boolean verificarDisponibilidadPorUbicacion(int idProducto, String ubicacion, int cantidad)
+			throws SQLException {
 		return stockDAO.verificarDisponibilidadPorUbicacion(idProducto, ubicacion, cantidad);
 	}
 
@@ -123,5 +127,21 @@ public class InventarioFacade {
 
 	public List<MateriaPrima> listarMateriasPrimasActivas() throws SQLException {
 		return materiaDAO.listarActivas();
+	}
+	
+	public List<CategoriaProducto> listarCategorias() throws SQLException {
+		return categoriaDAO.listarTodas();
+	}
+
+	public boolean crearCategoria(CategoriaProducto c) throws SQLException {
+		return categoriaDAO.crear(c);
+	}
+
+	public boolean actualizarCategoria(CategoriaProducto c) throws SQLException {
+		return categoriaDAO.actualizar(c);
+	}
+
+	public boolean desactivarCategoria(int id) throws SQLException {
+		return categoriaDAO.desactivar(id);
 	}
 }

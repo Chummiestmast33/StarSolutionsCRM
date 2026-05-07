@@ -51,7 +51,7 @@ public class EmpleadoDAOImpl implements IEmpleadoDAO {
         List<Empleado> lista = new ArrayList<>();
 
         try (PreparedStatement ps = getConn().prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 lista.add(mapear(rs));
@@ -99,7 +99,8 @@ public class EmpleadoDAOImpl implements IEmpleadoDAO {
             ps.setString(3, empleado.getTipoEmpleado());
 
             int filas = ps.executeUpdate();
-            if (filas == 0) return false;
+            if (filas == 0)
+                return false;
 
             // Obtener el num generado
             try (ResultSet keys = ps.getGeneratedKeys()) {
@@ -164,8 +165,8 @@ public class EmpleadoDAOImpl implements IEmpleadoDAO {
     // Inserta en la subtabla correcta según el tipo de empleado
     private void insertarEnSubtabla(int num, String tipo) throws SQLException {
         String tabla = switch (tipo) {
-            case "Ventas"     -> "rh_empleado_ventas";
-            case "RH"         -> "rh_empleado_rh";
+            case "Ventas" -> "rh_empleado_ventas";
+            case "RH" -> "rh_empleado_rh";
             case "Inventario" -> "rh_empleado_inventario";
             case "Produccion" -> "rh_empleado_produccion";
             default -> throw new SQLException("Tipo de empleado no reconocido: " + tipo);
@@ -177,4 +178,16 @@ public class EmpleadoDAOImpl implements IEmpleadoDAO {
             ps.executeUpdate();
         }
     }
+
+    @Override
+    public boolean actualizarIndicadores(int num, double productividad, double eficiencia) throws SQLException {
+        String sql = "UPDATE rh_empleado SET productividad = ?, eficiencia = ? WHERE num = ?";
+        try (PreparedStatement ps = getConn().prepareStatement(sql)) {
+            ps.setDouble(1, productividad);
+            ps.setDouble(2, eficiencia);
+            ps.setInt(3, num);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
 }

@@ -6,6 +6,7 @@ import com.starsolutions.starsolutionscrm.model.ventas.VentaDetalle;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IVentaDAO {
@@ -23,4 +24,7 @@ public interface IVentaDAO {
 
     // NUEVO: Metodo para obtener todo el historial
     List<Venta> listarVentas() throws SQLException;
+
+    List<Venta> listarVentasPorFiltros(Integer idCliente, LocalDate fechaInicio,
+            LocalDate fechaFin, String estatus) throws SQLException;
 }

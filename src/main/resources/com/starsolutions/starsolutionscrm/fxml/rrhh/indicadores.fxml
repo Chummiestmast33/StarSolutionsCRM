@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.starsolutions.starsolutionscrm.controller.rrhh.IndicadoresController">
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Label text="Indicadores de Desempeño" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="cbTipoFiltro" promptText="Filtrar por tipo" prefWidth="160"/>
+            <Button text="Filtrar" onAction="#onFiltrar"/>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="tablaIndicadores">
+            <columns>
+                <TableColumn fx:id="colNum"            text="Núm."       prefWidth="70"/>
+                <TableColumn fx:id="colNombre"         text="Nombre"     prefWidth="200"/>
+                <TableColumn fx:id="colTipo"           text="Tipo"       prefWidth="120"/>
+                <TableColumn fx:id="colProductividad"  text="Productividad %" prefWidth="150"/>
+                <TableColumn fx:id="colEficiencia"     text="Eficiencia %"    prefWidth="150"/>
+            </columns>
+        </TableView>
+    </center>
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="10" bottom="10" left="10"/></padding>
+            <Label text="Núm. Empleado:"/>
+            <TextField fx:id="txtNumEmpleado" prefWidth="80" editable="false"/>
+            <Label text="Productividad %:"/>
+            <TextField fx:id="txtProductividad" prefWidth="80"/>
+            <Label text="Eficiencia %:"/>
+            <TextField fx:id="txtEficiencia" prefWidth="80"/>
+            <Button text="Guardar Cambios" onAction="#onGuardar"/>
+        </HBox>
+    </bottom>
+</BorderPane>
