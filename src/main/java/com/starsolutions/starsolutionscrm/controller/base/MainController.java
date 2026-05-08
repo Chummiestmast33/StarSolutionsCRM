@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,6 +30,8 @@ public class MainController {
     private StackPane contentArea;
     @FXML
     private Button btnMenuToggle;
+    @FXML
+    private ImageView imgLogo;
 
     // Botones Generales
     @FXML
@@ -70,6 +74,12 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        if (imgLogo != null) {
+            imgLogo.setImage(new Image(
+                    getClass().getResourceAsStream("/com/starsolutions/starsolutionscrm/img/FlowDeskLogo.png")
+            ));
+        }
+
         SessionManager session = SessionManager.getInstance();
         if (session.getEmpleadoActual() != null) {
             String nombre = session.getEmpleadoActual().getNombre();
@@ -317,7 +327,7 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(BASE_FXML + "base/login.fxml"));
             Stage stage = (Stage) lblBienvenida.getScene().getWindow();
             stage.setScene(new Scene(loader.load(), 600, 400));
-            stage.setTitle("Star Solutions CRM - Login");
+            stage.setTitle("Flowdesk — Login");
             stage.setResizable(false);
         } catch (IOException e) {
             AlertUtil.error("Error", "No se pudo cerrar la sesion.");

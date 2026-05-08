@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,8 +23,18 @@ public class LoginController {
     @FXML private TextField txtNumero;
     @FXML private PasswordField txtContrasena;
     @FXML private Label lblError;
+    @FXML private ImageView imgLogo;
 
     private final IEmpleadoDAO empleadoDAO = new EmpleadoDAOImpl();
+
+    @FXML
+    public void initialize() {
+        if (imgLogo != null) {
+            imgLogo.setImage(new Image(
+                    getClass().getResourceAsStream("/com/starsolutions/starsolutionscrm/img/FlowDeskLogo.png")
+            ));
+        }
+    }
 
     @FXML
     public void onLogin() {
@@ -73,7 +85,9 @@ public class LoginController {
             );
             Stage stage = (Stage) txtNumero.getScene().getWindow();
             stage.setScene(new Scene(loader.load(), 1280, 720));
-            stage.setTitle("Star Solutions CRM");
+            stage.setTitle("Flowdesk");
+            stage.setResizable(true);
+            stage.show();
         } catch (IOException e) {
             mostrarError("No se pudo abrir la pantalla principal.");
             e.printStackTrace();

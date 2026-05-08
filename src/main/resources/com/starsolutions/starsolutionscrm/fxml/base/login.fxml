@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -15,9 +16,11 @@
           AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-        <!-- Título -->
-        <Label text="Star Solutions CRM"
-               style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <ImageView fx:id="imgLogo"
+                   fitWidth="240"
+                   fitHeight="100"
+                   preserveRatio="true"
+                   smooth="true"/>
 
         <Label text="Iniciar Sesión"
                style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
